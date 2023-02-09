@@ -14,7 +14,7 @@ use App\Http\Controllers\admin\dao\Pengajarcontroller;
 use App\Http\Controllers\admin\dao\Penggunacontroller;
 use App\Http\Controllers\admin\dao\Ruangancontroller;
 use App\Http\Controllers\admin\dao\Sekolahcontroller;
-use App\Http\Controllers\admin\dao\Siswacontroller;
+use App\Http\Controllers\admin\dao\SiswaController;
 use App\Http\Controllers\admin\dao\Tahuncontroller;
 use App\Http\Controllers\admin\dao\Wali_Kelas_C;
 use App\Http\Controllers\Alumnicontroller;
@@ -108,12 +108,12 @@ Route::prefix("admin")->group(function(){
     // Manajemen Data Siswa
 
     route::get("data-tahun-akademik", [Siswacontroller::class, "dataAkademik"]);
-    route::get("data-siswa",[Siswacontroller::class,"getDataSiswa"]);
-    route::post("save-siswa",[Siswacontroller::class,"saveDataSiswa"]);
+    route::get("data-siswa",[SiswaController::class,"getDataSiswa"]);
+    route::post("save-siswa",[SiswaController::class,"saveDataSiswa"]);
     route::get("siswa-by-ortu/{id}",[Siswacontroller::class,"getDataSiswaByOrtu"]);
     route::get("siswa-by-query/{id_akademik}/{id_kelas}",[Siswacontroller::class,"getDataSiswaByQuery"]);
-    route::post("update-siswa",[Siswacontroller::class,"updateDataSiswa"]);
-    route::post("delete-siswa",[Siswacontroller::class,"deleteDataSiswa"]);
+    route::post("update-siswa",[SiswaController::class,"updateDataSiswa"]);
+    route::delete("delete-siswa/{nik}/{id_orang_tua}",[SiswaController::class,"deleteDataSiswa"]);
     route::post("upload-foto-kk/{nism}",[uploadFiles::class,"uploadImageKk"]);
     route::post("upload-foto-siswa/{nism}",[uploadFiles::class,"uploadImageSiswa"]);
 

@@ -60,16 +60,11 @@
                                 <tbody style="font-size: 12px">
                                     <tr class="text-center" ng-repeat="row in datasiswa">
                                         <td>@{{ $index + 1 }}</td>
-                                        <td>@{{ row.nism }}</td>
-                                        <td>@{{ row.nama_siswa }}</td>
+                                        <td>@{{ row.nis }}</td>
+                                        <td>@{{ row.nama_lengkap }}</td>
                                         <td>@{{ row.nama_ayah }}</td>
                                         <td>@{{ row.nama_ibu }}</td>
-                                        <td>
-                                            <p ng-if="row.id_kelas==0"
-                                                style="color: red;font-size: 12px;font-weight: bolder;">
-                                                @{{ row.caption_kelas }}</p>
-                                            <p ng-if="row.id_kelas!=0" style="font-size: 12px;">@{{ row.nama_kelas }}</p>
-                                        </td>
+                                        <td>@{{ row.nama_kelas }}</td>
                                         <td>
                                             <div class="row">
                                                 <div class="col-6 col-md-6">

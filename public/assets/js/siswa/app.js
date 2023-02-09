@@ -83,6 +83,16 @@ app.controller("homeController", function ($scope, service) {
 
 
 
+    // fungsi menampilkan data siswa
+    fun.dataSiswa=()=>{
+        service.dataSiswa(row=>{
+            fun.datasiswa=row.data;
+        })
+    }
+
+    fun.dataSiswa();
+
+
     // fungsi preview berkas kk
     fun.loadBerkas= () => {
         var page = document.createElement("a");
@@ -91,6 +101,7 @@ app.controller("homeController", function ($scope, service) {
         page.click();
 
     }
+
     // fungsi menampilkan data akademik
     fun.getDataAkademik=()=>{
        service.dataAkademik(row=>{
@@ -116,6 +127,40 @@ app.controller("homeController", function ($scope, service) {
     };
 
 
+    fun.detail=(row)=>{
+       fun.checkedtambah = true;
+       fun.checkedtable = true;
+       fun.ket = "Perbarui Siswa";
+       fun.btnsimpan = false;
+       fun.btnperbarui=true;
+       fun.id_siswa=row.id_siswa;
+       fun.id_orang_tua=row.id_orang_tua;
+       fun.foto=row.foto;
+       fun.kk=row.kk;
+       siswa[0].value=row.nis;
+       siswa[1].value=row.nik;
+       siswa[2].value=row.nama_lengkap;
+       siswa[3].value=row.tempat_lahir;
+       siswa[4].value=row.tgl_lahir;
+       siswa[5].value=row.jenis_kelamin
+       siswa[6].value=row.id_agama;
+       siswa[7].value=row.id_kelas;
+       siswa[8].value=row.id_tahun_ajaran;
+       sekolah[0].value=row.asal_sekolah_dasar;
+       sekolah[1].value=row.asal_sekolah_menengah;
+       siswa[9].value=row.anak_ke;
+       siswa[10].value=row.status_dalam_keluarga;
+       ortu[0].value=row.nama_ayah;
+       ortu[1].value=row.nama_ibu;
+       ortu[2].value=row.pekerjaan_ayah;
+       ortu[3].value=row.pekerjaan_ibu;
+       ortu[4].value=row.alamat;
+       ortu[5].value=row.nomor_telepon;
+       wali[0].value=row.nama_wali;
+
+       wali[1].value=row.pekerjaan_wali;
+       wali[2].value=row.alamat_wali;
+    }
 
     // fungsi membersikan data masukan
     fun.clear = () => {
@@ -147,10 +192,7 @@ app.controller("homeController", function ($scope, service) {
 
     // fungsi menyimpan data siswa
     fun.save = () => {
-        /*
         $("#cover-spin").show();
-        */
-
         try {
             var data_siswa={
                 nis:siswa[0].value,
@@ -163,7 +205,9 @@ app.controller("homeController", function ($scope, service) {
                 id_kelas:siswa[7].value,
                 tahun_masuk:siswa[8].value,
                 anak_ke:siswa[9].value,
-                status_dalama_keluarga:siswa[10].value
+                status_dalama_keluarga:siswa[10].value,
+                foto:"default.jpg",
+                kk:"kosong"
             }
 
             var data_sekolah={
@@ -234,125 +278,85 @@ app.controller("homeController", function ($scope, service) {
 
     fun.perbarui = () => {
         $("#cover-spin").show();
-        var data = [
-            siswa[0].value,
-            siswa[1].value,
-            siswa[2].value,
-            siswa[3].value,
-            siswa[4].value,
-            siswa[5].value,
-            siswa[6].value,
-            siswa[7].value,
-            siswa[8].value,
-        ];
-        var obj = {
-            nism: data[0],
-            nik: data[1],
-            nama_siswa: data[2],
-            tempat_lahir: data[3],
-            tgl_lahir: data[4],
-            jenis_kelamin: data[5],
-            id_agama: data[6],
-            id_kelas: data[7],
-            id_tahun_ajaran: data[8],
-            id_orang_tua: id_ortu,
-            foto_kk: "",
-            foto_siswa: "",
-            id: fun.id
-        };
-        var file = document.getElementById("file1");
-        var fd_berkas = new FormData();
-        var file2 = document.getElementById("file2");
-        var fd_siswa = new FormData();
-        fd_berkas.append("file", file.files[0]);
-        fd_siswa.append("file", file2.files[0]);
-        if (file.files.length == 0 && file2.files.length == 0) {
-            obj.foto_kk = datafoto[0];
-            obj.foto_siswa = datafoto[1];
-            service.updateSiswa(obj, (row) => {
-                $("#cover-spin").hide();
-                if (row > 0) {
-                    swal({
-                        text: "Perbarui data berhasil",
-                        icon: "success"
-                    })
-                } else {
-                    swal({
-                        text: "Perbarui data gagal",
-                        icon: "warning"
-                    })
-                }
-            })
-        } else if (file.files.length == 0) {
-            service.uploadFotoSiswa(fd_siswa, data[1], (res) => {
-                if (res.val > 0) {
-                    obj.foto_siswa = res.data;
-                    obj.foto_kk = datafoto[0];
-                    service.updateSiswa(obj, (row) => {
-                        $("#cover-spin").hide();
-                        if (row > 0) {
-                            swal({
-                                text: "Perbarui data berhasil",
-                                icon: "success"
-                            })
+        try {
+            var data_siswa={
+                nis:siswa[0].value,
+                nik:siswa[1].value,
+                nama_lengkap:siswa[2].value,
+                tempat_lahir:siswa[3].value,
+                tgl_lahir:siswa[4].value,
+                jenis_kelamin:siswa[5].value,
+                id_agama:siswa[6].value,
+                id_kelas:siswa[7].value,
+                tahun_masuk:siswa[8].value,
+                anak_ke:siswa[9].value,
+                status_dalama_keluarga:siswa[10].value,
+                foto:fun.foto,
+                kk:fun.kk,
+                id_siswa:fun.id_siswa
+            }
 
-                        } else {
-                            swal({
-                                text: "Perbarui data gagal",
-                                icon: "warning"
-                            })
-                        }
-                    })
-                }
-            });
-        }
-        else if (file2.files.length == 0) {
-            service.uploadFotoKk(fd_berkas, data[1], (res) => {
-                if (res.val > 0) {
-                    obj.foto_kk = res.data;
-                    obj.foto_siswa = datafoto[1];
-                    service.updateSiswa(obj, (row) => {
-                        $("#cover-spin").hide();
-                        if (row > 0) {
-                            swal({
-                                text: "Perbarui data berhasil",
-                                icon: "success"
-                            })
-                        } else {
-                            swal({
-                                text: "Perbarui data gagal",
-                                icon: "warning"
-                            })
-                        }
-                    })
-                }
-            });
-        }
-        else {
-            service.uploadFotoKk(fd_berkas, data[1], (res) => {
-                if (res.val > 0) {
-                    obj.foto_kk = res.data;
-                    service.uploadFotoSiswa(fd_siswa, data[1], (resp) => {
-                        if (resp.val > 0) {
-                            obj.foto_siswa = resp.data;
-                            service.updateSiswa(obj, (row) => {
-                                $("#cover-spin").hide();
-                                if (row > 0) {
-                                    swal({
-                                        text: "Perbarui data berhasil",
-                                        icon: "success"
-                                    })
-                                } else {
-                                    swal({
-                                        text: "Perbarui data gagal",
-                                        icon: "warning"
-                                    })
-                                }
-                            })
-                        }
-                    });
-                }
-            });
+            var data_sekolah={
+                asal_sekolah_dasar:sekolah[0].value,
+                asal_sekolah_menengah:sekolah[1].value
+            }
+
+            var data_ortu={
+                nama_ayah:ortu[0].value,
+                nama_ibu:ortu[1].value,
+                pekerjaan_ayah:ortu[2].value,
+                pekerjaan_ibu:ortu[3].value,
+                alamat:ortu[4].value,
+                nomor_telepon:ortu[5].value,
+                id_orang_tua:fun.id_orang_tua
+            }
+            var data_wali={
+                nama_wali:wali[0].value,
+                pekerjaan_wali:wali[1].value,
+                alamat_wali:wali[2].value
+            }
+
+            var data={siswa:data_siswa,ortu:data_ortu,wali:data_wali,sekolah:data_sekolah,tgl_penerimaan:tanggal_penerimaan.value,id_siswa:fun.id_siswa}
+            var file_foto = document.getElementById("file1");
+            var fd_foto = new FormData();
+            var file_kk = document.getElementById("file2");
+            var fd_kk = new FormData();
+            fd_foto.append("file", file_foto.files[0]);
+            fd_kk.append("file", file_kk.files[0]);
+            if (file_kk.value.length > 0) {
+                service.uploadFotoKk(fd_kk, data_siswa.nik, (res) => {
+                    if (res.val > 0) {
+                        data_siswa.foto_kk = res.data;
+                    }
+                });
+            }
+
+            if (file_foto.value.length > 0) {
+                service.uploadFotoSiswa(fd_foto, data_siswa.nik, (resp) => {
+                    if (resp.val > 0) {
+                        data_siswa.foto_siswa = resp.data;
+                    }
+                });
+            }
+
+            setTimeout((e) => {
+                service.updateSiswa(data, (row) => {
+                    $("#cover-spin").hide();
+                    if (row.action> 0) {
+                        swal({
+                            text: "Perbarui data siswa berhasil",
+                            icon: "success",
+                        });
+                    } else {
+                        swal({
+                            text: "Simpan data siswa gagal",
+                            icon: "error",
+                        });
+                    }
+                });
+            }, 3000);
+        } catch (error) {
+            console.error("error in "+error)
         }
     };
 
@@ -373,12 +377,12 @@ app.controller("homeController", function ($scope, service) {
     fun.hapus = (row) => {
         $("#cover-spin").show();
         const obj = {
-            id: row.id_siswa,
-            nik: row.nik
+          nik:row.nik,
+          id_orang_tua:row.id_orang_tua
         };
-        service.deleteSiswa(obj, (row) => {
+        service.deleteSiswa(obj.nik,obj.id_orang_tua, (row) => {
             $("#cover-spin").hide();
-            if (row > 0) {
+            if (row.action > 0) {
                 swal({
                     text: "Data Siswa ini telah dihapus",
                     icon: "success",

@@ -25,11 +25,10 @@ app.service("service", ["$http", function ($http) {
 
         });
     }
-    this.deleteSiswa = function (obj, callback) {
+    this.deleteSiswa = function (nik,id_orang_tua,callback) {
         $http({
-            url: link + "delete-siswa",
-            method: "POST",
-            data: obj
+            url: link + "delete-siswa/"+nik+"/"+id_orang_tua,
+            method: "DELETE",
         }).then(function (e) {
 
             callback(e.data);
