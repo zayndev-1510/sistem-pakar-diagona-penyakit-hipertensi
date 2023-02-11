@@ -17,11 +17,14 @@ app.controller("homeController", function ($scope, service) {
     fun.dataTahun=()=>{
         $("#cover-spin").show();
         service.dataTahun(row=>{
-           fun.datatahun=row;
-           $("#cover-spin").hide();
-        })
+            if(row.action>0){
+                fun.datatahun=row.data;
+                $("#cover-spin").hide();
+                return;
+            };
+        });
     }
-   
+
     fun.dataTahun();
 
     fun.tambahData=()=>{
@@ -36,17 +39,19 @@ app.controller("homeController", function ($scope, service) {
             data_input[i].value="";
         }
     }
+
     fun.detail=(row)=>{
+        fun.id=row.id_tahun_ajaran;
         fun.checkedtambah=true;
         fun.btnsimpan=false;
         fun.btnperbarui=true;
-        fun.id=row.id;
-        const data=[row.ket,row.semester,row.tgl,row.status];
+
+        const data=[row.tahun_akademik,row.semester,row.tgl,row.status];
         for(var i in data){
             data_input[i].value=data[i];
         }
      }
-   
+
     fun.kembali=()=>{
         fun.checkedtambah=false;
         fun.btnperbarui=false;
@@ -57,7 +62,7 @@ app.controller("homeController", function ($scope, service) {
 
     fun.save=()=>{
         var obj={
-            ket:data_input[0].value,
+            tahun_akademik:data_input[0].value,
             semester:data_input[1].value,
             tgl:data_input[2].value,
             status:data_input[3].value,
@@ -65,7 +70,7 @@ app.controller("homeController", function ($scope, service) {
         $("#cover-spin").show();
         service.saveTahun(obj,(row)=>{
             $("#cover-spin").hide();
-            if(row>0){
+            if(row.action>0){
                 swal({
                     text:"Data Ini Berhasil Di Simpan",
                     icon:"success"
@@ -83,16 +88,16 @@ app.controller("homeController", function ($scope, service) {
 
     fun.perbarui=()=>{
         var obj={
-            ket:data_input[0].value,
+            tahun_akademik:data_input[0].value,
             semester:data_input[1].value,
             tgl:data_input[2].value,
             status:data_input[3].value,
-            id:fun.id
+            id_tahun_ajaran:fun.id
         };
         $("#cover-spin").show();
         service.updateTahun(obj,(row)=>{
             $("#cover-spin").hide();
-            if(row>0){
+            if(row.action>0){
                 swal({
                     text:"Data Ini Berhasil Di Perbarui",
                     icon:"success"
@@ -107,13 +112,13 @@ app.controller("homeController", function ($scope, service) {
         })
     }
     fun.hapus=(row)=>{
-        const obj={
-            id:row.id
-        }
+        var obj={
+            id_tahun_ajaran:row.id_tahun_ajaran
+        };
         $("#cover-spin").show();
-        service.deleteTahun(obj,(e)=>{
+        service.deleteTahun(obj.id_tahun_ajaran,(e)=>{
             $("#cover-spin").hide();
-            if(e>0){
+            if(e.action>0){
                 swal({
                     text:"Data Ini Berhasil Di Hapus",
                     icon:"success"

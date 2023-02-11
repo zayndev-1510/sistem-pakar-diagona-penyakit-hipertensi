@@ -7,7 +7,7 @@ use App\Http\Controllers\admin\dao\Jadwalcontroller;
 use App\Http\Controllers\admin\dao\Kegiatan_C;
 use App\Http\Controllers\admin\dao\KelasController;
 use App\Http\Controllers\admin\dao\Logincontroller;
-use App\Http\Controllers\admin\dao\Mapelcontroller;
+use App\Http\Controllers\admin\dao\MapelController;
 use App\Http\Controllers\admin\dao\Nilaicontroller;
 use App\Http\Controllers\admin\dao\Orangtuacontroller;
 use App\Http\Controllers\admin\dao\Pengajarcontroller;
@@ -15,7 +15,7 @@ use App\Http\Controllers\admin\dao\Penggunacontroller;
 use App\Http\Controllers\admin\dao\Ruangancontroller;
 use App\Http\Controllers\admin\dao\Sekolahcontroller;
 use App\Http\Controllers\admin\dao\SiswaController;
-use App\Http\Controllers\admin\dao\Tahuncontroller;
+use App\Http\Controllers\admin\dao\AkademikController;
 use App\Http\Controllers\admin\dao\Wali_Kelas_C;
 use App\Http\Controllers\Alumnicontroller;
 use App\Http\Controllers\Caloncontroller;
@@ -56,10 +56,10 @@ Route::prefix("admin")->group(function(){
 
     // Manajemen Tahun Akadmeik Sekolah
     route::get("data-sekolah",[Sekolahcontroller::class,"getDataSekolah"]);
-    route::get("data-tahun",[Tahuncontroller::class,"dataTahunAjaran"]);
-    route::post("save-tahun",[Tahuncontroller::class,"saveTahunAjaran"]);
-    route::post("update-tahun",[Tahuncontroller::class,"updateTahunAjaran"]);
-    route::post("delete-tahun",[Tahuncontroller::class,"deleteTahunAjaran"]);
+    route::get("data-akademik",[AkademikController::class,"getDataAkademik"]);
+    route::post("save-akademik",[AkademikController::class,"saveDataAkademik"]);
+    route::post("update-akademik",[AkademikController::class,"updateDataAkademik"]);
+    route::delete("delete-akademik/{id}",[AkademikController::class,"deleteDataAkademik"]);
 
 
     // Manajemen Data Pengguna
@@ -77,11 +77,11 @@ Route::prefix("admin")->group(function(){
 
 
     // Manajemen Data Mata Pelajaran
-    route::get("data-mapel",[Mapelcontroller::class,"getDataMapel"]);
-    route::post("save-mapel",[Mapelcontroller::class,"saveDataMapel"]);
-    route::post("update-mapel",[Mapelcontroller::class,"updateDataMapel"]);
-    route::post("delete-mapel",[Mapelcontroller::class,"deleteDataMapel"]);
-    route::get("data-mapel-by-akademik/{id}",[Mapelcontroller::class,"getDataMapelByAkademik"]);
+    route::get("data-mapel",[MapelController::class,"getDataMapel"]);
+    route::post("save-mapel",[MapelController::class,"saveDataMapel"]);
+    route::post("update-mapel",[MapelController::class,"updateDataMapel"]);
+    route::delete("delete-mapel/{id}",[Mapelcontroller::class,"deleteDataMapel"]);
+    route::get("data-akademik-mapel",[MapelController::class,"getDataAkademik"]);
 
 
     // Manajemen Data Ruangan
@@ -106,7 +106,6 @@ Route::prefix("admin")->group(function(){
 
 
     // Manajemen Data Siswa
-
     route::get("data-tahun-akademik", [Siswacontroller::class, "dataAkademik"]);
     route::get("data-siswa",[SiswaController::class,"getDataSiswa"]);
     route::post("save-siswa",[SiswaController::class,"saveDataSiswa"]);
@@ -119,7 +118,6 @@ Route::prefix("admin")->group(function(){
 
 
     // Manajemen Data Jadwal
-
     route::get("data-jadwal",[Jadwalcontroller::class,"getDataJadwal"]);
     route::get("jadwal-by-hari/{x}",[Jadwalcontroller::class,"dataJadwalByDay"]);
     route::post("save-jadwal",[Jadwalcontroller::class,"saveDataJadwal"]);

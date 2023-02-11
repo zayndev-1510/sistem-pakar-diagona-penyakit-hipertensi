@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Tblmapel extends Model
 {
     use HasFactory;
-    protected $table = "tbl_mata_pelajaran";
-    protected $primaryKey = "id";
+    protected $table = "TBL_MAPEL";
+    protected $primaryKey = "id_mapel";
     public $timestamps = false;
 
-    protected $fillable = ['id','ket','id_tahun_ajaran'];
+    protected $fillable = ['id_mapel','nama_mapel',"id_tahun_ajaran"];
 }

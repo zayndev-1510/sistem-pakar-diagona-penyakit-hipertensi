@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Tbltahun_ajaran extends Model
 {
     use HasFactory;
-    protected $table = "TBL_TAHUN_AJARANG";
-    protected $primaryKey = "id";
+    protected $table = "TBL_TAHUN_AJARAN";
+    protected $primaryKey = "id_tahun_ajaran";
     public $timestamps = false;
 
-    protected $fillable =['id', 'tahun_akademik','semester','tgl','status'];
+    protected $fillable =['id_tahun_ajaran', 'tahun_akademik','semester','tgl','status'];
 
 }

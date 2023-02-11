@@ -32,6 +32,7 @@
                                     <tr class="text-center">
                                         <th>No</th>
                                         <th>Mata Pelajaran</th>
+                                        <th>Tahun Akademik</th>
                                         <th>
                                             Aksi
                                         </th>
@@ -40,7 +41,9 @@
                                 <tbody style="font-size: 12px">
                                     <tr class="text-center" ng-repeat="row in datamapel">
                                         <td>@{{ $index + 1 }}</td>
-                                        <td>@{{ row.ket }}</td>
+                                        <td>@{{ row.nama_mapel }}</td>
+                                        <td>@{{ row.tahun_akademik }}</td>
+
                                         <td>
                                             <div class="row">
                                                 <div class="col-6 col-md-6">
@@ -85,6 +88,18 @@
                                             <div class="form-group">
                                                 <input type="text" style="font-size: 12px;font-family: Poppins;" class="form-control mapel"
                                                     placeholder="Mata Pelajaran">
+                                                <p style="font-size: 12px;font-family: Poppins;"><small style="color: red;"> * </small> Wajib Isi
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+
+                                                <select class="form-control mapel">
+                                                    <option value="-">Pilih Tahun Akademik</option>
+                                                    <option ng-repeat="row in dataakademik" value="@{{row.id_tahun_ajaran}}">@{{row.tahun_akademik}}</option>
+                                                </select>
+
                                                 <p style="font-size: 12px;font-family: Poppins;"><small style="color: red;"> * </small> Wajib Isi
                                                 </p>
                                             </div>

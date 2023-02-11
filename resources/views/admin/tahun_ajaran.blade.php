@@ -32,7 +32,7 @@
                                         <th>No</th>
                                         <th>Tahun Akademik</th>
                                         <th>Semester</th>
-                                        <th>Tanggal Akademik</th>
+                                        <th>Tanggal Akadmeik</th>
                                         <th>Status</th>
                                         <th>
                                             Aksi
@@ -42,7 +42,7 @@
                                 <tbody style="font-size: 12px">
                                     <tr class="text-center" ng-repeat="row in datatahun">
                                         <td>@{{ $index + 1 }}</td>
-                                        <td>@{{ row.ket }}</td>
+                                        <td>@{{ row.tahun_akademik }}</td>
                                         <td>@{{ row.semester }}</td>
                                         <td>@{{ row.tgl }}</td>
                                         <td>
@@ -68,14 +68,14 @@
                     <div class="card-body">
                         <div class="header-title">
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-9">
                                     <i class="ti-angle-left" style="cursor: pointer" ng-hide="checktahun"
                                         ng-click="kembali()"></i>
                                     <i class="ti-angle-left" style="cursor: pointer" ng-show="checktahun"
                                         ng-click="selesai()"></i>
 
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <p style="font-size: 13px;">@{{ ket }}</p>
                                 </div>
                             </div>

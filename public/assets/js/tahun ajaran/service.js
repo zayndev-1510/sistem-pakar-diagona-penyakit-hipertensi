@@ -3,7 +3,7 @@ app.service("service", ["$http", function ($http) {
 
     this.saveTahun = function (obj, callback) {
         $http({
-            url: link + "save-tahun",
+            url: link + "save-akademik",
             method: "POST",
             data: obj
         }).then(function (e) {
@@ -16,7 +16,7 @@ app.service("service", ["$http", function ($http) {
 
     this.updateTahun = function (obj, callback) {
         $http({
-            url: link + "update-tahun",
+            url: link + "update-akademik",
             method: "POST",
             data: obj
         }).then(function (e) {
@@ -28,8 +28,8 @@ app.service("service", ["$http", function ($http) {
     }
     this.deleteTahun = function (obj, callback) {
         $http({
-            url: link + "delete-tahun",
-            method: "POST",
+            url: link + "delete-akademik/"+obj,
+            method: "DELETE",
             data: obj
         }).then(function (e) {
 
@@ -40,7 +40,7 @@ app.service("service", ["$http", function ($http) {
     }
     this.dataTahun= function (callback) {
         $http({
-            url:  link+"data-tahun",
+            url:  link+"data-akademik",
             method: "GET"
         }).then(function (e) {
 
@@ -50,5 +50,5 @@ app.service("service", ["$http", function ($http) {
         });
     }
 
-  
+
 }]);

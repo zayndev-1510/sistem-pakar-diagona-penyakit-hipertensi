@@ -9,7 +9,7 @@ class Tblsiswa extends Model
 {
     use HasFactory;
     protected $table = "TBL_SISWA";
-    protected $primaryKey = "id";
+    protected $primaryKey = "id_siswa";
     public $timestamps = false;
 
     protected $fillable =

@@ -28,8 +28,8 @@ app.service("service", ["$http", function ($http) {
     }
     this.deleteMapel = function (obj, callback) {
         $http({
-            url: link + "delete-mapel",
-            method: "POST",
+            url: link + "delete-mapel/"+obj,
+            method: "DELETE",
             data: obj
         }).then(function (e) {
 
@@ -49,9 +49,9 @@ app.service("service", ["$http", function ($http) {
 
         });
     }
-    this.dataTahun= function (callback) {
+    this.dataAkademik= function (callback) {
         $http({
-            url:  link+"data-tahun",
+            url:  link+"data-akademik-mapel",
             method: "GET"
         }).then(function (e) {
 

@@ -18,13 +18,26 @@ app.controller("homeController", function ($scope, service) {
     fun.dataMapel = () => {
         $("#cover-spin").show();
         service.dataMapel((row) => {
-            datamapel = row;
-            fun.datamapel=datamapel;
+            if(row.action>0){
+                datamapel = row.data;
+                fun.datamapel=datamapel;
+            }
+
             $("#cover-spin").hide();
 
         });
     };
+
+    fun.dataAkademik=()=>{
+        service.dataAkademik(row=>{
+            if(row.action>0){
+                fun.dataakademik=row.data;
+                return;
+            }
+        });
+    }
     fun.dataMapel();
+    fun.dataAkademik();
     fun.tambahData = () => {
         fun.ket = "Tambah Pelajaran";
         fun.checkedtambah = true;
@@ -32,8 +45,9 @@ app.controller("homeController", function ($scope, service) {
         fun.btnperbarui = false;
     };
     fun.detail = (row) => {
-        fun.id = row.id;
-        mapel[0].value = row.ket;
+        fun.id = row.id_mapel;
+        mapel[0].value = row.nama_mapel;
+        mapel[1].value=row.id_tahun_ajaran;
         fun.checkedtambah = true;
         fun.btnsimpan = false;
         fun.btnperbarui = true;
@@ -58,13 +72,14 @@ app.controller("homeController", function ($scope, service) {
 
     fun.save = () => {
         $("#cover-spin").show();
-        var data = [mapel[0].value];
+
         var obj = {
-            ket: data[0],
+            nama_mapel:mapel[0].value,
+            id_tahun_ajaran:mapel[1].value
         };
         service.saveMapel(obj, (row) => {
             $("#cover-spin").hide();
-            if (row > 0) {
+            if (row.action> 0) {
                 swal({
                     text: "Mata Pelajaran Ini Berhasil Di Simpan",
                     icon: "success",
@@ -82,13 +97,14 @@ app.controller("homeController", function ($scope, service) {
 
     fun.perbarui = () => {
         $("#cover-spin").show();
-        const obj = {
-            ket: mapel[0].value,
-            id: fun.id,
+        var obj = {
+            nama_mapel:mapel[0].value,
+            id_tahun_ajaran:mapel[1].value,
+            id_mapel:fun.id
         };
         service.updateMapel(obj, (row) => {
             $("#cover-spin").hide();
-            if (row > 0) {
+            if (row.action > 0) {
                 swal({
                     text: "Mata Pelajaran Ini Berhasil Di Perbarui",
                     icon: "success",
@@ -105,12 +121,9 @@ app.controller("homeController", function ($scope, service) {
 
     fun.hapus = (row) => {
         $("#cover-spin").show();
-        const obj = {
-            id: row.id,
-        };
-        service.deleteMapel(obj, (e) => {
+        service.deleteMapel(row.id_mapel, (e) => {
             $("#cover-spin").hide();
-            if (e > 0) {
+            if (e.action > 0) {
                 swal({
                     text: "Mata Pelajaran Ini Berhasil Di Hapus",
                     icon: "success",
