@@ -44,7 +44,7 @@
                                     </tr>
                                     <tr ng-repeat="res in row.data" class="text-center">
                                         <td>@{{ res.jam_masuk }} - @{{ res.jam_keluar }}</td>
-                                        <td>@{{ res.nama_matpel }}</td>
+                                        <td>@{{ res.nama_mapel }}</td>
                                         <td>@{{ res.nama_kelas }}</td>
                                         <td>@{{ res.nama_guru }}</td>
                                         <td>
@@ -115,6 +115,21 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="col-12"
+                                        style="border: 2px solid whitesmoke;margin-bottom: 5px;padding: 5px;">
+                                        <div class="row">
+                                            <div class="col-11">
+                                                <p style="font-size: 12px;font-family: Poppins;">@{{ kelas }}
+                                                </p>
+                                            </div>
+                                            <div class="col-1">
+                                                <i class="ti-angle-right pull-right"
+                                                    style="cursor: pointer;font-weight: bolder;margin-top:5px;"
+                                                    ng-click="pilihKelas()"></i>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                         <div class="col-12"
                                             style="border: 2px solid whitesmoke;
@@ -210,7 +225,24 @@
                                             <tr class="text-center" ng-repeat="row in datamapel" ng-click="getMapel(row)"
                                                 style="cursor: pointer;">
                                                 <td>@{{ $index + 1 }}</td>
-                                                <td>@{{ row.ket }}</td>
+                                                <td>@{{ row.nama_mapel }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-12" ng-show="checkkelas">
+                                    <table datatable="ng" class="table table-bordered">
+                                        <thead class="bg-light" style="font-size: 12px;">
+                                            <tr class="text-center">
+                                                <th>No</th>
+                                                <th>Kelas</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="font-size: 12px">
+                                            <tr class="text-center" ng-repeat="row in datakelas" ng-click="getKelas(row)"
+                                                style="cursor: pointer;">
+                                                <td>@{{ $index + 1 }}</td>
+                                                <td>@{{ row.keterangan}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -221,15 +253,13 @@
                                             <tr class="text-center">
                                                 <th>No</th>
                                                 <th>Nama Guru</th>
-                                                <th>Kelas</th>
                                             </tr>
                                         </thead>
                                         <tbody style="font-size: 12px">
                                             <tr class="text-center" style="cursor: pointer;"
                                                 ng-repeat="row in datapengajar" ng-click="getPengajar(row)">
                                                 <td>@{{ $index + 1 }}</td>
-                                                <td>@{{ row.nama }}</td>
-                                                <td>@{{ row.nama_kelas }}</td>
+                                                <td>@{{ row.nama_guru }}</td>
                                             </tr>
                                         </tbody>
                                     </table>

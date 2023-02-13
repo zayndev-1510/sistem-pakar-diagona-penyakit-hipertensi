@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Tbljadwalmapel extends Model
 {
     use HasFactory;
-    protected $table = Str::upper("tbl_jadwal_mapel");
+    protected $table =("TBL_JADWAL_MAPEL");
     protected $primaryKey = "id_jadwal";
     public $timestamps = false;
-    protected $fillable = ['id_jadwal','id_guru','hari','jam_masuk','jam_keluar','id_mapel'];
+    protected $fillable = ['id_jadwal','id_guru','hari','jam_masuk','jam_keluar','id_mapel','id_kelas'];
 
 }

@@ -29,8 +29,8 @@ app.service("service", ["$http", function ($http) {
 
     this.deleteJadwal = function (obj, callback) {
         $http({
-            url: link + "delete-jadwal",
-            method: "POST",
+            url: link + "delete-jadwal/"+obj,
+            method: "DELETE",
             data: obj
         }).then(function (e) {
 
@@ -42,7 +42,7 @@ app.service("service", ["$http", function ($http) {
 
     this.dataPengajar= function (callback) {
         $http({
-            url:  link+"data-pengajar",
+            url:  link+"data-guru",
             method: "GET"
         }).then(function (e) {
 
@@ -52,9 +52,9 @@ app.service("service", ["$http", function ($http) {
         });
     }
 
-    this.dataWaliKelas= function (callback) {
+    this.dataKelas= function (callback) {
         $http({
-            url:  link+"data-wali",
+            url:  link+"data-ruangan",
             method: "GET"
         }).then(function (e) {
 

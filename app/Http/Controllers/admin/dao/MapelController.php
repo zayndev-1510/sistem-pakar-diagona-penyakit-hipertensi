@@ -50,7 +50,9 @@ class MapelController extends Controller
 
                 if($id_tahun==$temp_id_tahun){
                         $value->tahun_akademik = $values->tahun_akademik;
+                        $value->status=$values->status;
                         $datanew[] = $value;
+
                 }
             }
         }

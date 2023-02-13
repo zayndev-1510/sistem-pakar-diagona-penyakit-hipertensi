@@ -3,7 +3,7 @@
 use App\Http\Controllers\admin\dao\ArsipGuru_C;
 use App\Http\Controllers\admin\dao\GuruController;
 use App\Http\Controllers\admin\dao\Ijazah_C;
-use App\Http\Controllers\admin\dao\Jadwalcontroller;
+use App\Http\Controllers\admin\dao\JadwalController;
 use App\Http\Controllers\admin\dao\Kegiatan_C;
 use App\Http\Controllers\admin\dao\KelasController;
 use App\Http\Controllers\admin\dao\Logincontroller;
@@ -118,11 +118,11 @@ Route::prefix("admin")->group(function(){
 
 
     // Manajemen Data Jadwal
-    route::get("data-jadwal",[Jadwalcontroller::class,"getDataJadwal"]);
-    route::get("jadwal-by-hari/{x}",[Jadwalcontroller::class,"dataJadwalByDay"]);
-    route::post("save-jadwal",[Jadwalcontroller::class,"saveDataJadwal"]);
-    route::post("update-jadwal",[Jadwalcontroller::class,"updateDataJadwal"]);
-    route::post("delete-jadwal",[Jadwalcontroller::class,"deleteDataJadwal"]);
+    route::get("data-jadwal",[JadwalController::class,"getDataJadwal"]);
+    route::get("jadwal-by-hari/{x}",[JadwalController::class,"dataJadwalByDay"]);
+    route::post("save-jadwal",[JadwalController::class,"saveDataJadwal"]);
+    route::post("update-jadwal",[JadwalController::class,"updateDataJadwal"]);
+    route::delete("delete-jadwal/{id}",[JadwalController::class,"deleteDataJadwal"]);
 
     // Manajemen Data Nilai
     route::get("data-nilai-by-pengajar/{id}/{id_siswa}",[Nilaicontroller::class,"showDataById"]);
