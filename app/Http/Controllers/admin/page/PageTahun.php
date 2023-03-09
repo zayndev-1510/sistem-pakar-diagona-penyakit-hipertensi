@@ -26,9 +26,15 @@ class PageTahun extends Controller
         }
         */
 
-
+        $datalogin=DB::table("TBL_ADMIN")->where("id_login","djsaldja493248")->select()->get();
+        $agama=DB::table("TBL_AGAMA")->select("*")->get();
+        $kelas=DB::table("TBL_KELAS")->select("*")->get();
+        $tahunajaran=DB::table("TBL_TAHUN_AJARAN")->select("*")->get();
         $data=(Object)[
-            "keterangan"=>"Data "
+            "agama"=>$agama,
+            "kelas"=>$kelas,
+            "tahunajaran"=>$tahunajaran,
+            "keterangan"=>"Data Guru"
         ];
         return view("admin.tahun_ajaran",compact('data','datalogin'));
     }
