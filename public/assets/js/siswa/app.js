@@ -52,6 +52,10 @@ app.controller("homeController", function ($scope, service) {
     // deklarasi variabel "nama_lengkap" dengan nilai string
     fun.nama_lengkap = "Zayn";
 
+    // deklarasi variabel "id_card"
+
+    var id_card="";
+
     // deklarasi variabel "siswa" untuk memanipulasi dom dari class "siswa"
     var siswa = document.getElementsByClassName("siswa");
 
@@ -65,6 +69,9 @@ app.controller("homeController", function ($scope, service) {
 
     // deklarasi variabel tanggal penerimaan
     var tanggal_penerimaan=document.getElementById("tgl_penerimaan")
+
+    // deklarasi variabel akun
+    var akun=document.getElementsByClassName("akun");
 
     // deklarasi variabel "btnsimpan" dengan nilai FALSE
     fun.btnsimpan = false;
@@ -158,6 +165,7 @@ app.controller("homeController", function ($scope, service) {
        ortu[5].value=row.nomor_telepon;
        wali[0].value=row.nama_wali;
 
+
        wali[1].value=row.pekerjaan_wali;
        wali[2].value=row.alamat_wali;
     }
@@ -192,6 +200,7 @@ app.controller("homeController", function ($scope, service) {
 
     // fungsi menyimpan data siswa
     fun.save = () => {
+        id_card=Math.floor(Math.random() * 99999999);
         $("#cover-spin").show();
         try {
             var data_siswa={
@@ -207,7 +216,8 @@ app.controller("homeController", function ($scope, service) {
                 anak_ke:siswa[9].value,
                 status_dalama_keluarga:siswa[10].value,
                 foto:"default.jpg",
-                kk:"kosong"
+                kk:"kosong",
+                id_card:id_card
             }
 
             var data_sekolah={
@@ -228,8 +238,12 @@ app.controller("homeController", function ($scope, service) {
                 pekerjaan_wali:wali[1].value,
                 alamat_wali:wali[2].value
             }
+            var data_akun={
+                username:akun[0].value,
+                katasandi:akun[1].value,
+            }
 
-            var data={siswa:data_siswa,ortu:data_ortu,wali:data_wali,sekolah:data_sekolah,tgl_penerimaan:tanggal_penerimaan.value}
+            var data={siswa:data_siswa,ortu:data_ortu,wali:data_wali,sekolah:data_sekolah,tgl_penerimaan:tanggal_penerimaan.value,akun:data_akun}
             var file_foto = document.getElementById("file1");
             var fd_foto = new FormData();
             var file_kk = document.getElementById("file2");

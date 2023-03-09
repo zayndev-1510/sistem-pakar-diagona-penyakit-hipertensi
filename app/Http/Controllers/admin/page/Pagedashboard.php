@@ -54,6 +54,7 @@ class Pagedashboard extends Controller
     }
 
     public function akun(){
+        /*
         if(isset($_COOKIE["userid"])){
             $userid=Crypt::decryptString($_COOKIE["userid"]);
             $datalogin=DB::table("tbl_admin")->where("id",$userid)->select()->get();
@@ -63,6 +64,14 @@ class Pagedashboard extends Controller
         else{
             return redirect("admin/login");
         }
+        */
+
+        $datalogin=DB::table("TBL_ADMIN")->where("id_login","djsaldja493248")->select()->get();
+
+        $data=(Object)[
+            "keterangan"=>"Tenaga Pendidikan"
+        ];
+        return view("admin.akun",compact('data','datalogin'));
     }
 
     public function calon(){

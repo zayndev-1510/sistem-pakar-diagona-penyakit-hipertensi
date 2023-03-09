@@ -202,24 +202,30 @@ app.controller("homeController", function ($scope, service) {
         fun.foto=row.foto;
         fun.ktp=row.ktp;
         fun.sk=row.sk;
-        var data = [
-            row.nip_guru,
-            row.nama_guru,
-            row.tempat_lahir,
-            row.tgl_lahir,
-            row.jenis_kelamin,
-            row.id_agama,
-            row.gelar_depan,
-            row.gelar_belakang,
-            row.no_telp,
-            row.email,
-            row.alamat_rumah,
-        ];
+        service.detailAkun(row.id_card,(res)=>{
+            var data = [
+                row.nip_guru,
+                row.nama_guru,
+                row.tempat_lahir,
+                row.tgl_lahir,
+                row.jenis_kelamin,
+                row.id_agama,
+                row.gelar_depan,
+                row.gelar_belakang,
+                row.no_telp,
+                row.email,
+                row.alamat_rumah,
+                res.data.username,
+                res.data.katasandi
+            ];
 
 
-        for (var i in data) {
-            guru[i].value = data[i];
-        }
+            for (var i in data) {
+                guru[i].value = data[i];
+            }
+        })
+
+
     };
 
 
@@ -233,7 +239,7 @@ app.controller("homeController", function ($scope, service) {
           gelar_depan:guru[6].value,gelar_belakang:guru[7].value,
           no_telp:guru[8].value,email:guru[9].value,
           alamat_rumah:guru[10].value,foto:"",ktp:"",sk:"",
-          id_card:randomDigit
+          id_card:randomDigit,username:guru[11].value,katasandi:guru[12].value,
         };
 
 
@@ -313,7 +319,8 @@ app.controller("homeController", function ($scope, service) {
             no_telp:guru[8].value,email:guru[9].value,
             alamat_rumah:guru[10].value,
             id_guru:fun.id,id_card:fun.id_card,
-            foto:fun.foto,ktp:fun.ktp,sk:fun.sk
+            foto:fun.foto,ktp:fun.ktp,sk:fun.sk,
+            username:guru[11].value,katasandi:guru[12].value
           };
 
 
@@ -400,8 +407,9 @@ app.controller("homeController", function ($scope, service) {
         $("#cover-spin").show();
         const obj = {
             id_card: row.id_card,
+            id_guru:row.id_guru
         };
-        service.deleteGuru(obj, (row) => {
+        service.deleteGuru(obj.id_card,obj.id_guru,(row) => {
             $("#cover-spin").hide();
             if (row.action > 0) {
                 swal({

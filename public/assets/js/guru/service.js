@@ -31,11 +31,22 @@ app.service("service", ["$http", function ($http) {
     }
 
      // api menghapus data guru
-    this.deleteGuru = function (obj, callback) {
+    this.deleteGuru = function (id_card,id_guru, callback) {
         $http({
-            url: link + "delete-guru",
-            method: "POST",
-            data: obj
+            url: link + "delete-guru/"+id_card+"/"+id_guru,
+            method: "DELETE",
+        }).then(function (e) {
+
+            callback(e.data);
+        }).catch(function (err) {
+
+        });
+    }
+
+    this.detailAkun = function (id_pengguna,callback) {
+        $http({
+            url: link + "detail-akun/"+id_pengguna,
+            method: "GET",
         }).then(function (e) {
 
             callback(e.data);

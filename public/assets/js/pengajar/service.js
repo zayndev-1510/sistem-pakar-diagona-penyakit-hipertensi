@@ -38,7 +38,7 @@ app.service("service", ["$http", function ($http) {
 
         });
     }
-    
+
     this.dataPengajar= function (callback) {
         $http({
             url:  link+"data-pengajar",

@@ -112,10 +112,6 @@
                                 </span></a>
                             <ul class="collapse">
                                 <li>
-                                    <a href="{{ url('admin/page/orangtua') }}" aria-expanded="true">
-                                        <i class="ti-user"></i><span> Orang Tua </span></a>
-                                </li>
-                                <li>
                                     <a href="{{ url('admin/page/kepala-sekolah') }}" aria-expanded="true">
                                         <i class="ti-user"></i><span> Kepala Sekolah </span></a>
                                 </li>
