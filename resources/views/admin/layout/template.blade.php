@@ -68,7 +68,7 @@
         <div class="sidebar-menu" style="background-color: #483D8B;color:white;">
             <div class="sidebar-header" style="background-color: #483D8B;color:white;">
                 <div class="logo">
-                    <p style="color: white;font-weight: bolder;">SIAKAD TK/RA AL MUSLIHUN</p>
+                    <p style="color: white;font-weight: bolder;">SISTEMP PAKAR DIAGONOSA HIPERTENSI</p>
 
                 </div>
             </div>
@@ -80,96 +80,24 @@
                                 <a href="{{ url('admin/page/dashboard') }}" aria-expanded="true"><i
                                         class="ti-dashboard"></i><span>dashboard</span></a>
                             </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i
-                                        class="ti-layout-sidebar-left"></i><span>Data Master
-                                    </span></a>
-                                <ul class="collapse">
-                                    <li><a href="{{ url('admin/page/sekolah') }}">
-                                            <i class="ti-home"></i>
-                                            <span>Identitas Sekolah</span></a></li>
-                                    <li>
-                                        <a href="{{ url('admin/page/tahun-akademik') }}">
-                                            <i class="ti-calendar"></i>
-                                            <span>Tahun Akademik</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ url('admin/page/ruangan') }}">
-                                            <i class="ti-user"></i>
-                                            <span>Ruangan</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ url('admin/page/kegiatan') }}">
-                                            <i class="ti-announcement"></i>
-                                            <span>Kegiatan</span></a>
-                                    </li>
+                            <li><a href="{{ url('admin/page/penyakit') }}">
+                                <i class="ti-heart"></i>
+                                <span>Data Penyakit</span></a>
                             </li>
-                        </ul>
-                        </li>
 
-                        <li>
-                            <a href="#" aria-expanded="true"><i class="ti-user"></i><span> Data Pengguna
-                                </span></a>
-                            <ul class="collapse">
-                                <li>
-                                    <a href="{{ url('admin/page/kepala-sekolah') }}" aria-expanded="true">
-                                        <i class="ti-user"></i><span> Kepala Sekolah </span></a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('admin/page/akun') }}" aria-expanded="true">
+                            <li><a href="{{ url('admin/page/gejala') }}">
+                                <i class="ti-support"></i>
+                                <span>Data Gejala</span></a>
+                            </li>
+                            <li><a href="{{ url('admin/page/basis-pengetahuan') }}">
+                                <i class="ti-panel"></i>
+                                <span>Data Basis Pengetahuan</span></a>
+                            </li>
 
-                                        <i class="ti-user"></i><span> Administrator </span></a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('admin/page/pengguna') }}" aria-expanded="true">
-
-                                        <i class="ti-user"></i><span> Pengguna </span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#" aria-expanded="true"><i class="ti-calendar"></i><span> Data Akademik
-                                </span></a>
-                            <ul class="collapse">
-                                <li><a href="{{ url('admin/page/guru') }}">
-                                        <i class="ti-user" aria-hidden="true"></i>
-                                        <span>Guru</span></a></li>
-                                <li>
-                                <li>
-                                    <a href="{{ url('admin/page/pengajar') }}" aria-expanded="true">
-                                        <i class="ti-user"></i><span> Tenaga Pendidikan </span></a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('admin/page/siswa') }}" aria-expanded="true">
-                                        <i class="ti-user"></i><span> Siswa </span></a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('admin/page/alumni') }}" aria-expanded="true">
-                                        <i class="ti-user"></i><span> Alumni </span></a>
-                                </li>
-                                <li><a href="{{ url('admin/page/mapel') }}">
-                                        <i class="ti-book" aria-hidden="true"></i>
-                                        <span>Mata Pelajaran</span></a></li>
-                                <li>
-                                <li>
-                                    <a href="{{ url('admin/page/jadwal') }}" aria-expanded="true">
-                                        <i class="ti-calendar"></i><span> Jadwal Matpel </span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="{{ url('admin/page/calon-siswa') }}" aria-expanded="true"><i
-                                    class="ti-user"></i><span>Data Pendaftaran
-                                </span></a>
-
-                        </li>
-                        <li>
-                            <a href="{{ url('admin/page/arsip-sekolah') }}" aria-expanded="true"><i
-                                    class="ti-user"></i><span>Arsip Sekolah
-                                </span></a>
-
-                        </li>
-
+                            <li><a href="{{ url('admin/page/aturan') }}">
+                                <i class="ti-panel"></i>
+                                <span>Data Aturan</span></a>
+                            </li>
 
                         </ul>
                     </nav>
@@ -274,7 +202,7 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="{{ asset('akun/' . $datalogin[0]->foto) }}"
+                            <img class="avatar user-thumb" src="{{ asset($datalogin[0]->foto) }}"
                                 alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
                                 {{ $datalogin[0]->nama_lengkap }}

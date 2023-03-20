@@ -22,28 +22,27 @@
                             </div>
                             <div class="col-2">
                                 <p id="design-btn-2" style="background-color: #514496;cursor: pointer;"
-                                ng-click="tambahData()"> <i class="ti-plus"></i> Menambahkan Penyakit</p>
+                                ng-click="tambahData()"> <i class="ti-plus"></i> Menambahkan Aturan</p>
                             </div>
                         </div>
 
                         <div class="data-tab">
                             <table datatable="ng" class="table table-bordered">
-                                <thead class="bg-light" style="font-size: 12px;">
-                                    <tr class="text-center" style="font-family: Poppins;font-size: 13px;text-align: center;">
+                                <thead class="bg-light" style="font-family: Poppins;font-size: 13px;text-align: center;">
+                                    <tr class="text-center">
                                         <th>No</th>
-                                        <th>Kode Penyakit</th>
-                                        <th>Nama Penyakit</th>
+                                        <th>Aturan</th>
+                                        <th>Penyakit</th>
                                         <th>
                                             Aksi
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody style="font-size: 12px">
-                                    <tr class="text-center" ng-repeat="row in datapenyakit" style="font-family: Poppins;font-size: 13px;text-align: center;">
+                                <tbody style="font-family: Poppins;font-size: 13px;text-align: center;">
+                                    <tr class="text-center" ng-repeat="row in dataaturan">
                                         <td>@{{ $index + 1 }}</td>
-                                        <td>@{{ row.kode_penyakit }}</td>
+                                        <td>@{{ row.rules }}</td>
                                         <td>@{{ row.nama_penyakit }}</td>
-
                                         <td>
                                             <div class="row">
                                                 <div class="col-6 col-md-6">
@@ -84,18 +83,34 @@
                             <div class="row" ng-hide="checktahun">
                                 <div class="col-12">
                                     <div class="row">
+                                        <div class="col-11">
+                                            <div class="form-group">
+                                                <select class="form-control aturan">
+                                                    <option value="">Pililh Gejala</option>
+                                                    <option ng-repeat="row in datagejala" value="@{{row.kode_gejala}}">@{{row.nama_gejala}}</option>
+                                                </select>
+                                                <p style="font-size: 12px;font-family: Poppins;"><small style="color: red;"> * </small> Wajib Isi
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <p id="design-btn-2" style="background-color: #514496;cursor: pointer;height: 38px;padding: 10px;"
+                                            ng-click="tambahGejala()"> <i class="ti-plus" style="font-size: 15px;"></i></p>
+                                        </div>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <input type="text" style="font-size: 12px;font-family: Poppins;" class="form-control penyakit"
-                                                    placeholder="Kode Penyakit">
+                                                <input type="text" disabled ="font-size: 12px;font-family: Poppins;" class="form-control aturan"
+                                                    placeholder="Aturan">
                                                 <p style="font-size: 12px;font-family: Poppins;"><small style="color: red;"> * </small> Wajib Isi
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <input type="text" style="font-size: 12px;font-family: Poppins;" class="form-control penyakit"
-                                                    placeholder="Nama Penyakit">
+                                                <select class="form-control aturan">
+                                                    <option value="">Pililh Penyakit</option>
+                                                    <option ng-repeat="row in datapenyakit" value="@{{row.kode_penyakit}}">@{{row.nama_penyakit}}</option>
+                                                </select>
                                                 <p style="font-size: 12px;font-family: Poppins;"><small style="color: red;"> * </small> Wajib Isi
                                                 </p>
                                             </div>
@@ -129,6 +144,6 @@
     <script src="{{ asset('assets/angularjs/angular-route.min.js') }}"></script>
     <script src="{{ asset('assets/angularjs/angular-datatables.min.js') }}"></script>
     <script src="{{ asset('assets/angularjs/sweetalert.min.js') }}"></script>
-    <script src="{{ asset('assets/js/admin/penyakit/app.js') }}"></script>
-    <script src="{{ asset('assets/js/admin/penyakit/service.js') }}"></script>
+    <script src="{{ asset('assets/js/admin/aturan/app.js') }}"></script>
+    <script src="{{ asset('assets/js/admin/aturan/service.js') }}"></script>
 @endsection

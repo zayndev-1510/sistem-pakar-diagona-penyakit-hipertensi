@@ -1,9 +1,21 @@
 <?php
 
+use App\Http\Controllers\admin\dao\CAturan;
+use App\Http\Controllers\admin\dao\CbasisPengetahuanCf;
 use App\Http\Controllers\admin\dao\CGejala;
+use App\Http\Controllers\admin\dao\Ckonsultasi;
+use App\Http\Controllers\admin\dao\Clogin;
 use App\Http\Controllers\admin\dao\CPenyakit;
 use Illuminate\Support\Facades\Route;
 
+
+route::get("coba",[Clogin::class,"cobaCF"]);
+
+// data gejala konsultasi
+route::get("data-gejala-konsultasi",[Ckonsultasi::class,"gejalaKonsultasi"]);
+
+// proses konsultasi
+route::post("proses-konsultasi",[Ckonsultasi::class,"prosesKonsultasi"]);
 Route::prefix("admin")->group(function(){
 
     route::get("welcome",function(){
@@ -11,6 +23,8 @@ Route::prefix("admin")->group(function(){
             "message"=>"Welcome"
         ]);
     });
+
+    route::post('loginAdmin',[Clogin::class,"LoginAdmin"]);
     // Manajemen data penyakit
 
     route::get("data-penyakit",[CPenyakit::class,"loadData"]);
@@ -25,7 +39,20 @@ Route::prefix("admin")->group(function(){
     route::post("update-data-gejala",[CGejala::class,"updateData"]);
     route::post("delete-data-gejala",[CGejala::class,"deleteData"]);
 
+    // Manajemen Data Basis Pengetahuan Certainly Factor
 
+    route::get("data-kepastian",[CbasisPengetahuanCf::class,"loadDataKepastian"]);
+    route::get("data-basis-pengetahuan-cf",[CbasisPengetahuanCf::class,"loadDataBasis"]);
+    route::post("save-data-basis-pengetahuan-cf",[CbasisPengetahuanCf::class,"saveData"]);
+    route::post("update-data-basis-pengetahuan-cf",[CbasisPengetahuanCf::class,"updateData"]);
+    route::post("delete-data-basis-pengetahuan-cf",[CbasisPengetahuanCf::class,"deleteData"]);
+
+    // Manajemen Data Aturan
+
+    route::get("data-aturan",[CAturan::class,"loadData"]);
+    route::post("save-data-aturan",[CAturan::class,"saveData"]);
+    route::post("update-data-aturan",[CAturan::class,"updateData"]);
+    route::post("delete-data-aturan",[CAturan::class,"deleteData"]);
 
 });
 

@@ -5,13 +5,14 @@ namespace App\Models\admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GejalaModels extends Model
+class AdminModels extends Model
 {
     use HasFactory;
-
-    protected $table = "tbl_gejala";
-    protected $primaryKey = "kode_gejala";
+    protected $table = "tbl_admin";
+   
     public $timestamps = false;
 
-    protected $fillable =["nama_gejala","kode_gejala"];
+    protected $fillable =["id_login","nama_lengkap","foto","username","katasandi"];
+
+
 }

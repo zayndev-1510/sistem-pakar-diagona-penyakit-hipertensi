@@ -29,23 +29,20 @@
                         <div class="data-tab">
                             <table datatable="ng" class="table table-bordered">
                                 <thead class="bg-light" style="font-size: 12px;">
-                                    <tr class="text-center">
+                                    <tr class="text-center" style="font-family: Poppins;font-size: 13px;text-align: center;">
                                         <th>No</th>
                                         <th>Kode Gejala</th>
                                         <th>Nama Gejala</th>
-                                        <th>Penyakit</th>
                                         <th>
                                             Aksi
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody style="font-size: 12px">
-                                    <tr class="text-center" ng-repeat="row in datagejala">
+                                    <tr class="text-center" ng-repeat="row in datagejala" style="font-family: Poppins;font-size: 13px;text-align: center;">
                                         <td>@{{ $index + 1 }}</td>
                                         <td>@{{ row.kode_gejala }}</td>
                                         <td>@{{ row.nama_gejala }}</td>
-                                        <td>@{{ row.nama_penyakit}}</td>
-
                                         <td>
                                             <div class="row">
                                                 <div class="col-6 col-md-6">
@@ -98,16 +95,6 @@
                                             <div class="form-group">
                                                 <input type="text" style="font-size: 12px;font-family: Poppins;" class="form-control gejala"
                                                     placeholder="Nama Gejala">
-                                                <p style="font-size: 12px;font-family: Poppins;"><small style="color: red;"> * </small> Wajib Isi
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                               <select class="form-control gejala">
-                                                <option value="">Pilih Penyakit</option>
-                                                <option ng-repeat="row in datapenyakit" value="@{{row.kode_penyakit}}">@{{row.nama_penyakit}}</option>
-                                               </select>
                                                 <p style="font-size: 12px;font-family: Poppins;"><small style="color: red;"> * </small> Wajib Isi
                                                 </p>
                                             </div>

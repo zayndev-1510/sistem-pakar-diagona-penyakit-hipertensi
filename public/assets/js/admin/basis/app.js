@@ -12,14 +12,15 @@ app.controller("homeController", function ($scope, service) {
 
     var service = service;
 
-    var gejala=document.getElementsByClassName("gejala");
+    var basis=document.getElementsByClassName("basis_pengetahuan");
 
 
-    var temp_kode=0;
+    var id_pengetahuan=0;
 
 
     // fungsi load data gejala
     fun.loadDataGejala=()=>{
+
         service.dataGejala(obj=>{
 
             var check=obj.action;
@@ -36,19 +37,77 @@ app.controller("homeController", function ($scope, service) {
         })
     }
 
+      // fungsi load data basis
+      fun.loadDataBasis=()=>{
+
+        service.dataBasis(obj=>{
+
+            var check=obj.action;
+            if(check==0){
+                swal({
+                    text:"Ada Kesalahan Memuat Data Gejala!",
+                    icon:"error",
+                });
+                return;
+            }
+
+            fun.databasis=obj.data;
+
+        })
+    }
+
+     // fungsi load data kepastian
+     fun.loadDataKepastian=()=>{
+
+        service.dataKepastian(obj=>{
+
+            var check=obj.action;
+            if(check==0){
+                swal({
+                    text:"Ada Kesalahan Memuat Data Kepastian!",
+                    icon:"error",
+                });
+                return;
+            }
+
+            fun.datakepastian=obj.data;
+
+        })
+    }
+
+    // fungsi load data penyakit
+    fun.loadDataPenyakit=()=>{
+
+        service.dataPenyakit(obj=>{
+
+            var check=obj.action;
+            if(check==0){
+                swal({
+                    text:"Ada Kesalahan Memuat Data Penyakit!",
+                    icon:"error",
+                });
+                return;
+            }
+
+            fun.datapenyakit=obj.data;
+
+        })
+    }
+
     fun.clearData=()=>{
-        for(var i=0;i<gejala.length;i++){
-            gejala[i].value="";
-        }
+        basis[2].value="";
+        basis[3].value="";
 
     }
     // call load data
+    fun.loadDataBasis();
     fun.loadDataGejala();
-
-
+    fun.loadDataPenyakit();
+    fun.loadDataKepastian();
     // fungsi tambah data
 
     fun.tambahData=()=>{
+
         fun.add=true;
         fun.btnsimpan=true;
         fun.clearData();
@@ -59,22 +118,25 @@ app.controller("homeController", function ($scope, service) {
         fun.btnsimpan=false;
         fun.btnperbarui=false;
         fun.clearData();
+        fun.loadDataBasis();
     }
 
     fun.detail=(row)=>{
         fun.add=true;
         fun.btnsimpan=false;
         fun.btnperbarui=true;
-        temp_kode=row.kode_gejala;
-        gejala[0].value=row.kode_gejala;
-        gejala[1].value=row.nama_gejala;
+        id_pengetahuan=row.id_pengetahuan;
+        basis[0].value=row.kode_penyakit;
+        basis[1].value=row.kode_gejala;
+        basis[2].value=row.mb;
+        basis[3].value=row.md;
     }
 
     fun.hapus=(row)=>{
         var obj={
-            temp_kode:row.kode_gejala
+            id_pengetahuan:row.id_pengetahuan
         }
-        service.deleteGejala(obj,respon=>{
+        service.deleteBasisPengetahuanCf(obj,respon=>{
 
             var check=respon.action;
             if (check==0){
@@ -89,19 +151,20 @@ app.controller("homeController", function ($scope, service) {
                 text:"Berhasil hapus",
                 icon:"success"
             })
-            fun.loadDataGejala();
-
+            fun.loadDataBasis();
         })
     }
 
     fun.save=()=>{
 
         var obj={
-            kode_gejala:gejala[0].value,
-            nama_gejala:gejala[1].value
+            kode_penyakit:basis[0].value,
+            kode_gejala:basis[1].value,
+            mb:basis[2].value,
+            md:basis[3].value
         }
 
-        service.saveGejala(obj,row=>{
+        service.saveBasisPengetahuanCf(obj,row=>{
             var check=row.action;
             if(check==0){
                 swal({
@@ -115,20 +178,21 @@ app.controller("homeController", function ($scope, service) {
                 text:"Simpan data berhasil",
                 icon:"success"
             });
-            fun.loadDataGejala();
             fun.clearData();
         })
     }
 
     fun.perbarui=()=>{
-
         var obj={
-            kode_gejala:gejala[0].value,
-            nama_gejala:gejala[1].value,
-            temp_kode:temp_kode
+            kode_penyakit:basis[0].value,
+            kode_gejala:basis[1].value,
+            mb:basis[2].value,
+            md:basis[3].value,
+            id_pengetahuan:id_pengetahuan
         }
 
-        service.updateGejala(obj,row=>{
+
+        service.updateBasisPengetahuanCf(obj,row=>{
             var check=row.action;
             if(check==0){
                 swal({
@@ -142,8 +206,7 @@ app.controller("homeController", function ($scope, service) {
                 text:"Perbarui data berhasil",
                 icon:"success"
             });
-            fun.loadDataGejala();
-            fun.clearData();
+            fun.kembali();
         })
 
     }

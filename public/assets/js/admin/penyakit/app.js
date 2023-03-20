@@ -143,7 +143,6 @@ app.controller("homeController", function ($scope, service) {
                 icon:"success"
             });
             fun.loadData();
-            fun.clearData();
         })
 
     }

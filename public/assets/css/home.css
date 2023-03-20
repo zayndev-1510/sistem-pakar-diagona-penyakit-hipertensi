@@ -233,6 +233,14 @@ a.btn-pink {
     margin-top: 20px;
 
 }
+.btn-action{
+    padding: 10px;
+    font-family:Poppins;
+    border: 2px solid whitesmoke;
+    color: white;
+    margin-bottom: 10px;
+}
+
 
 .img-responsive {
     width: 100%;
@@ -646,7 +654,18 @@ img.my-img {
 .column-one{
     display: grid;
     grid-template-columns: 100%;
-
+}
+.form-select{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border: 2px solid whitesmoke;
+    background-color: white;
+    border-radius: 10px;
+}
+.form-select:hover{
+    border: 2px solid #7765EF;
 }
 #cover-spin {
     position: fixed;

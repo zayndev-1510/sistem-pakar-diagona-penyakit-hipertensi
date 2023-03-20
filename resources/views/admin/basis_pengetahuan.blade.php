@@ -22,37 +22,43 @@
                             </div>
                             <div class="col-2">
                                 <p id="design-btn-2" style="background-color: #514496;cursor: pointer;"
-                                ng-click="tambahData()"> <i class="ti-plus"></i> Menambahkan Penyakit</p>
+                                ng-click="tambahData()"> <i class="ti-plus"></i> Menambahkan Basis Pengetahuan</p>
                             </div>
                         </div>
 
                         <div class="data-tab">
-                            <table datatable="ng" class="table table-bordered">
-                                <thead class="bg-light" style="font-size: 12px;">
-                                    <tr class="text-center" style="font-family: Poppins;font-size: 13px;text-align: center;">
-                                        <th>No</th>
-                                        <th>Kode Penyakit</th>
-                                        <th>Nama Penyakit</th>
-                                        <th>
-                                            Aksi
-                                        </th>
+                            <table class="table table-bordered">
+                                <thead class="bg-light" style="font-family: Poppins;font-size: 13px;text-align: center;">
+                                    <tr class="text-center">
+                                        <th>Penyakit</th>
+                                        <th>Gejala</th>
+                                        <th>MB</th>
+                                        <td>MD</td>
+                                        <td>Aksi</td>
+
                                     </tr>
                                 </thead>
-                                <tbody style="font-size: 12px">
-                                    <tr class="text-center" ng-repeat="row in datapenyakit" style="font-family: Poppins;font-size: 13px;text-align: center;">
-                                        <td>@{{ $index + 1 }}</td>
-                                        <td>@{{ row.kode_penyakit }}</td>
-                                        <td>@{{ row.nama_penyakit }}</td>
+                                <tbody sstyle="font-family: Poppins;font-size: 13px;text-align: center;" ng-repeat="row in databasis">
+                                    <tr>
 
+                                        <td rowspan="@{{row.x+1}}"
+                                            style=" text-align: center;
+                                            vertical-align: middle;">
+                                            @{{ row.nama_penyakit }}</td>
+                                    </tr>
+                                    <tr ng-repeat="res in row.gejala" class="text-center">
+                                        <td>@{{ res.nama_gejala }}</td>
+                                        <td>@{{ res.mb }}</td>
+                                        <td>@{{ res.md }}</td>
                                         <td>
                                             <div class="row">
                                                 <div class="col-6 col-md-6">
                                                     <p id="design-btn-2" style="background-color: #FFD04C;cursor: pointer;"
-                                                        ng-click="detail(row)"> <i class="ti-pencil"></i> Edit Data</p>
+                                                        ng-click="detail(res)"> <i class="ti-pencil"></i> Edit Data</p>
                                                 </div>
                                                 <div class="col-6 col-md-6">
                                                     <p id="design-btn-2" style="background-color: #E81224;cursor: pointer;"
-                                                        ng-click="hapus(row)"> <i class="ti-trash"></i> Hapus Data</p>
+                                                        ng-click="hapus(res)"> <i class="ti-trash"></i> Hapus Data</p>
                                                 </div>
                                             </div>
                                         </td>
@@ -86,16 +92,40 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <input type="text" style="font-size: 12px;font-family: Poppins;" class="form-control penyakit"
-                                                    placeholder="Kode Penyakit">
+                                                <select name="penyakit" class="form-control basis_pengetahuan">
+                                                    <option value="">Pilih Penyakit</option>
+                                                    <option ng-repeat="row in datapenyakit" value="@{{row.kode_penyakit}}">@{{row.nama_penyakit}}</option>
+                                                </select>
                                                 <p style="font-size: 12px;font-family: Poppins;"><small style="color: red;"> * </small> Wajib Isi
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <input type="text" style="font-size: 12px;font-family: Poppins;" class="form-control penyakit"
-                                                    placeholder="Nama Penyakit">
+                                                <select name="penyakit" class="form-control basis_pengetahuan">
+                                                    <option value="">Pilih Gejala</option>
+                                                    <option ng-repeat="row in datagejala" value="@{{row.kode_gejala}}">@{{row.nama_gejala}}</option>
+                                                </select>
+                                                <p style="font-size: 12px;font-family: Poppins;"><small style="color: red;"> * </small> Wajib Isi
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <select name="penyakit" class="form-control basis_pengetahuan">
+                                                    <option value="">Nilai Kepastian MB</option>
+                                                    <option ng-repeat="row in datakepastian" value="@{{row.nilai}}">@{{row.keterangan}}(@{{row.nilai}})</option>
+                                                </select>
+                                                <p style="font-size: 12px;font-family: Poppins;"><small style="color: red;"> * </small> Wajib Isi
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <select name="penyakit" class="form-control basis_pengetahuan">
+                                                    <option value="">Nilai Kepastian MD</option>
+                                                    <option ng-repeat="row in datakepastian" value="@{{row.nilai}}">@{{row.keterangan}}(@{{row.nilai}})</option>
+                                                </select>
                                                 <p style="font-size: 12px;font-family: Poppins;"><small style="color: red;"> * </small> Wajib Isi
                                                 </p>
                                             </div>
@@ -129,6 +159,6 @@
     <script src="{{ asset('assets/angularjs/angular-route.min.js') }}"></script>
     <script src="{{ asset('assets/angularjs/angular-datatables.min.js') }}"></script>
     <script src="{{ asset('assets/angularjs/sweetalert.min.js') }}"></script>
-    <script src="{{ asset('assets/js/admin/penyakit/app.js') }}"></script>
-    <script src="{{ asset('assets/js/admin/penyakit/service.js') }}"></script>
+    <script src="{{ asset('assets/js/admin/basis/app.js') }}"></script>
+    <script src="{{ asset('assets/js/admin/basis/service.js') }}"></script>
 @endsection

@@ -16,6 +16,24 @@
         <div class="sales-report-area mt-5 mb-5">
             <div class="row">
                 <div class="col-12">
+                    <div class="row">
+                        <div class="col-md-6" style="background-color: white;">
+                            <h3 style="margin-bottom: 30px;">Selamat Datang Admin</h3>
+                            <h4 style="margin-bottom: 30px;">Diagonosa Penyakit Hipertensi Perbandingan Metode Forward Chaining Dan Certainly Factor</h4>
+                            <p style="font-size: 15px;font-family: Poppins;">Adanya aplikasi ini untuk membandingan metode forward chaining dan certainly faktor
+                                dalam mengampbil keputusan diagonosa penyakit hipertensi
+                            </p>
+
+                            <p style="font-size: 15px;font-family: Poppins;">Ada beberapa pertanyaan yg telah disediakan dari aplikasi dalam mencari penyakit yg diderita dari gejala-gejala yg dipilih
+                                forward chaining menentukan kesimpulan dengan beberapa aturan-aturan yang telah dibuat dalam sistem ini, dan certainly faktor untuk mencari tingkat kepastian dalam menentukan penyakit yg diderita
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="{{asset('Hipertensi_mempengaruhi_seluruh_tubuh_MRHP.jpg')}}" class="img-responsive"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" style="margin-top: 10px;">
                     <div class="row" style="margin-bottom: 10px;">
                         <div class="col-md-4" style="cursor: pointer"
                             onclick="window.location.href='{{ url('admin/page/ruangan') }}'">
@@ -23,11 +41,11 @@
                                 <div class="s-report-inner pr--10 pt--30 mb-3">
                                     <div class="icon"><i class="ti-room"></i></div>
                                     <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Ruangan</h4>
+                                        <h4 class="header-title mb-0">Penyakit</h4>
 
                                     </div>
                                     <div class="d-flex justify-content-between pb-2">
-                                        <h2>{{ $data['ruangan'] }}</h2>
+                                        <h2>{{ $data->penyakit }}</h2>
                                     </div>
                                 </div>
 
@@ -39,11 +57,11 @@
                                 <div class="s-report-inner pr--10 pt--30 mb-3">
                                     <div class="icon"><i class="ti-book"></i></div>
                                     <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Mata Pelajaran</h4>
+                                        <h4 class="header-title mb-0">Gejala</h4>
 
                                     </div>
                                     <div class="d-flex justify-content-between pb-2">
-                                        <h2>{{ $data['mapel'] }}</h2>
+                                        <h2>{{ $data->gejala }}</h2>
                                     </div>
                                 </div>
 
@@ -55,141 +73,15 @@
                                 <div class="s-report-inner pr--10 pt--30 mb-3">
                                     <div class="icon"><i class="ti-user"></i></div>
                                     <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Orang Tua</h4>
+                                        <h4 class="header-title mb-0">Basis Pengetahuan</h4>
 
                                     </div>
                                     <div class="d-flex justify-content-between pb-2">
-                                        <h2>{{ $data['orangtua'] }}</h2>
+                                        <h2>{{ $data->basis_pengetahuan }}</h2>
                                     </div>
                                 </div>
 
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4" style="cursor: pointer"
-                            onclick="window.location.href='{{ url('admin/page/guru') }}'">
-                            <div class="single-report">
-                                <div class="s-report-inner pr--10 pt--30 mb-3">
-                                    <div class="icon"><i class="ti-user"></i></div>
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Guru</h4>
-
-                                    </div>
-                                    <div class="d-flex justify-content-between pb-2">
-                                        <h2>{{ $data['guru'] }}</h2>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-4" style="cursor: pointer"
-                            onclick="window.location.href='{{ url('admin/page/siswa') }}'">
-                            <div class="single-report">
-                                <div class="s-report-inner pr--10 pt--30 mb-3">
-                                    <div class="icon"><i class="ti-user"></i></div>
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Siswa</h4>
-
-                                    </div>
-                                    <div class="d-flex justify-content-between pb-2">
-                                        <h2>{{ $data['siswa'] }}</h2>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-4" style="cursor: pointer"
-                            onclick="window.location.href='{{ url('admin/page/kegiatan') }}'">
-                            <div class="single-report">
-                                <div class="s-report-inner pr--10 pt--30 mb-3">
-                                    <div class="icon"><i class="ti-user"></i></div>
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Kegiatan</h4>
-
-                                    </div>
-                                    <div class="d-flex justify-content-between pb-2">
-                                        <h2>{{ $data['kegiatan'] }}</h2>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4" style="cursor: pointer"
-                            onclick="window.location.href='{{ url('admin/page/alumni') }}'">
-                            <div class="single-report">
-                                <div class="s-report-inner pr--10 pt--30 mb-3">
-                                    <div class="icon"><i class="ti-user"></i></div>
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Alumni</h4>
-
-                                    </div>
-                                    <div class="d-flex justify-content-between pb-2">
-                                        <h2>{{ $data["alumni"] }}</h2>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-4" style="cursor: pointer"
-                            onclick="window.location.href='{{ url('admin/page/siswa') }}'">
-                            <div class="single-report">
-                                <div class="s-report-inner pr--10 pt--30 mb-3">
-                                    <div class="icon"><i class="ti-user"></i></div>
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Siswa Aktif</h4>
-
-                                    </div>
-                                    <div class="d-flex justify-content-between pb-2">
-                                        <h2>{{ $data['siswa_aktif'] }}</h2>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-4" style="cursor: pointer"
-                            onclick="window.location.href='{{ url('admin/page/arsip-sekolah') }}'">
-                            <div class="single-report">
-                                <div class="s-report-inner pr--10 pt--30 mb-3">
-                                    <div class="icon"><i class="ti-folder"></i></div>
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Arsip Dokumen</h4>
-
-                                    </div>
-                                    <div class="d-flex justify-content-between pb-2">
-                                        <h2>{{ $data['arsip'] }}</h2>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column-1">
-                    <div class="white">
-                        <h5 style="text-align: center">Grafik Data Siswa Berdasarkan Tahun</h5>
-
-                        <div style="width: 100%;margin: 0px auto;"">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="column-2">
-                    <div class="white">
-                        <div>
-                            <h5 style="text-align: center">Grafik Data Siswa Berdasarkan Kelamin</h5>
-                            <div style="width:auto;margin: 0px auto;height: 100%">
-                                <canvas id="myChart2"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="white">
-                        <h5 style="text-align: center">Grafik Data Siswa Berdasarkan Kelamin</h5>
-
-                        <div style="width: 100%;margin: 0px auto;height: 100%;">
-                            <canvas id="myChart3"></canvas>
                         </div>
                     </div>
 

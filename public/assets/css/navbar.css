@@ -1,7 +1,7 @@
 nav {
     width: 100%;
     display: grid;
-    grid-template-columns: 40% auto;
+    grid-template-columns: 80% auto;
     margin-bottom: 10px;
     border-bottom: 3px solid whitesmoke;
     height: 50px;

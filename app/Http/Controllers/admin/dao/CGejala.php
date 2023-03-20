@@ -14,9 +14,7 @@ class CGejala extends Controller
 
         try {
             $data=[];
-            $data=DB::table("tbl_penyakit as penyakit")->join("tbl_gejala as gejala","gejala.kode_penyakit","=","penyakit.kode_penyakit")
-            ->select("penyakit.kode_penyakit","penyakit.nama_penyakit","gejala.kode_gejala","gejala.nama_gejala")
-            ->get();
+           $data=DB::table("tbl_gejala")->select("*")->get();
 
             echo json_encode([
                 "code"=>200,
@@ -39,7 +37,6 @@ class CGejala extends Controller
     public function saveData(Request $r){
         try {
             $input=[
-                "kode_penyakit"=>$r->kode_penyakit,
                 "kode_gejala"=>$r->kode_gejala,
                 "nama_gejala"=>$r->nama_gejala
             ];
@@ -76,7 +73,6 @@ class CGejala extends Controller
 
         try {
             $input=[
-                "kode_penyakit"=>$r->kode_penyakit,
                 "kode_gejala"=>$r->kode_gejala,
                 "nama_gejala"=>$r->nama_gejala
             ];
