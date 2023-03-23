@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 
 route::get("home",[Page::class,"homeUser"]);
+route::get("gejala",[Page::class,"gejalaUser"]);
+route::get("penyakit",[Page::class,"penyakitUser"]);
 route::get("konsultasi",[Page::class,"konsultasi"]);
 
 Route::prefix('admin')->group(function () {
@@ -29,6 +31,11 @@ Route::prefix('admin')->group(function () {
 
     //route utk memanggil halaman aturan
     route::get("/page/aturan",[Page::class,"halamanAturan"]);
+
+    //route utk memanggil halaman pasien
+    route::get("/page/pasien",[Page::class,"halamanPasien"]);
+
+
 
 
 

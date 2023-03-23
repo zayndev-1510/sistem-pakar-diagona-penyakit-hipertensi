@@ -10,12 +10,11 @@ app.controller("homeController", function ($scope, service) {
     var service = service;
 
 
-    fun.pageKonsultasi=()=>{
-        window.location.href="http://localhost:8000/konsultasi";
+    fun.dataPenyakit=()=>{
+        service.dataPenyakit(res=>{
+            fun.datapenyakit=res.data;
+        })
     }
-
-    fun.halamanKonsultasi=()=>{
-        window.location.href="http://localhost:8000/konsultasi";
-    }
+    fun.dataPenyakit();
 
 });

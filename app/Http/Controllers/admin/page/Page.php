@@ -14,6 +14,16 @@ class Page extends Controller
         return view("home");
     }
 
+    public function gejalaUser(){
+
+        return view("gejala");
+    }
+
+    public function penyakitUser(){
+
+        return view("penyakit");
+    }
+
     public function konsultasi(){
         return view("konsultasi");
     }
@@ -89,6 +99,16 @@ class Page extends Controller
             ];
             $datalogin=DB::table("tbl_admin")->where("id_login",$_COOKIE["idlogin"])->select()->get();
             return view("admin.aturan",compact('data','datalogin'));
+        }else
+        return view("login");
+    }
+    public function halamanPasien(){
+        if(isset($_COOKIE["idlogin"])){
+            $data=(Object)[
+                "keterangan"=>"Data Pasien"
+            ];
+            $datalogin=DB::table("tbl_admin")->where("id_login",$_COOKIE["idlogin"])->select()->get();
+            return view("admin.pasien",compact('data','datalogin'));
         }else
         return view("login");
     }

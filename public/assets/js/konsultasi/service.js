@@ -40,6 +40,19 @@ app.service("service", ["$http", function ($http) {
         });
     }
 
+      // fungsi memanggil api proses menyimpan data pasien
+      this.savePasien= function (obj,callback) {
+        $http({
+            url:  link+"save-pasien",
+            method: "POST",
+            data:obj
+        }).then(function (e) {
+            callback(e.data);
+        }).catch(function (err) {
+
+        });
+    }
+
 
 
 

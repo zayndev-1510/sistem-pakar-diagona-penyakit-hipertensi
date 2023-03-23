@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin\dao;
 
 use App\Http\Controllers\Controller;
+use App\Models\admin\PasienModels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class Ckonsultasi extends Controller
@@ -156,20 +157,50 @@ class Ckonsultasi extends Controller
 
                 }
             }
+            $duplicate_y=0;
 
-
+            $checkmaxvalue=false;
             if($check==0){
                 $y=0;
 
                 foreach ($datapakar as $key => $value) {
                     $x=$value["x"];
                     if($x>$y){
-                        $y=$value["nama_penyakit"];
-                        $strpenyakit=$y;
+                        $y=$x;
+                    }
+                    if($x==$y){
+                        $checkmaxvalue=true;
+                        $strpenyakit=$value["nama_penyakit"];
                     }
                 }
+                if(!$checkmaxvalue){
+                    $cm = array_column($datapakar, 'x');
+                    if($cm != array_unique($cm)){
+                       $duplicate_y=$duplicate_y+1;
+                    }
+                }
+
+
             }
 
+
+
+            $k=0;
+            $arrpenyakit=[];
+            $j=0;
+            foreach ($arrayhasil as $key => $value) {
+                $hasil=$value["hasil"];
+                if($hasil>$k){
+                    $k=$hasil;
+                }
+                if($k==$hasil){
+                    $arrpenyakit=[
+                        "penyakit"=>$value["penyakit"],
+                        "hasil"=>$hasil
+                    ];
+                    $j=$j+1;
+                }
+            }
 
             $respon=[
                 "datapakar"=>$datapakar,
@@ -180,6 +211,9 @@ class Ckonsultasi extends Controller
                 "rank"=>$rank,
                 "aturan"=>$string,
                 "penyakit"=>$strpenyakit,
+                "penyakitv2"=>$arrpenyakit,
+                "duplicate"=>$duplicate_y,
+                "duplicatecf"=>$j
             ];
 
             echo json_encode([
@@ -198,6 +232,46 @@ class Ckonsultasi extends Controller
                 "action"=>0
             ]
             );
+        }
+    }
+
+    public function savePasien(Request $r){
+        try {
+            date_default_timezone_set("Asia/Makassar");
+            $string=implode(",",$r->gejala);
+            $data=[
+                "nama_pasien"=>$r->nama_pasien,
+                "tempat_lahir"=>$r->tempat_lahir,
+                "tgl_lahir"=>$r->tgl_lahir,
+                "jenis_kelamin"=>$r->jenis_kelamin,
+                "agama"=>$r->agama,
+                "alamat_rumah"=>$r->alamat_rumah,
+                "nomor_handphone"=>$r->nomor_handphone,
+                "gejala"=>$string,
+                "penyakit"=>$r->penyakit,
+                "tgl_konsultasi"=>date("Y-m-d"),
+                "jam_konsultasi"=>date("H:s:d")
+            ];
+            $query=PasienModels::create($data);
+            if($query){
+                echo json_encode([
+                    "code"=>200,
+                    "message"=>"Success",
+                    "action"=>1
+                ]);
+                return;
+            }
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Failed",
+                "action"=>0
+            ]);
+        } catch (\Throwable $th) {
+            echo json_encode([
+                "code"=>500,
+                "message"=>"Error ".$th->getMessage(),
+                "action"=>0
+            ]);
         }
     }
 }

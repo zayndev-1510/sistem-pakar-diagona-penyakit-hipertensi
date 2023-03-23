@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\dao\CGejala;
 use App\Http\Controllers\admin\dao\Ckonsultasi;
 use App\Http\Controllers\admin\dao\Clogin;
 use App\Http\Controllers\admin\dao\CPenyakit;
+use App\Http\Controllers\admin\dao\PasienControllers;
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,6 +17,8 @@ route::get("data-gejala-konsultasi",[Ckonsultasi::class,"gejalaKonsultasi"]);
 
 // proses konsultasi
 route::post("proses-konsultasi",[Ckonsultasi::class,"prosesKonsultasi"]);
+route::post("save-pasien",[Ckonsultasi::class,"savePasien"]);
+
 Route::prefix("admin")->group(function(){
 
     route::get("welcome",function(){
@@ -53,6 +56,12 @@ Route::prefix("admin")->group(function(){
     route::post("save-data-aturan",[CAturan::class,"saveData"]);
     route::post("update-data-aturan",[CAturan::class,"updateData"]);
     route::post("delete-data-aturan",[CAturan::class,"deleteData"]);
+
+    // Manajemen Data Pasien
+
+    route::get("data-pasien",[PasienControllers::class,"dataPasien"]);
+    route::post("hapus-pasien",[PasienControllers::class,"hapusPasien"]);
+
 
 });
 

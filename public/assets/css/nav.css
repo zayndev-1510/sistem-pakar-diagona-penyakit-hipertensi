@@ -1,0 +1,56 @@
+.navbar .logo{
+    width: 100%;
+    height: 60px;
+    background-color:transparent;
+    border-right-color: transparent;
+    position: relative;
+}
+.navbar .logo::before{
+    content: "SISTEM PAKAR DIAGONOSA PENYAKIT HIPERTENSI";
+    color: black;
+    font-size: 20px;
+    font-family: Poppins;
+    font-weight: 800;
+    margin-top: 10px;
+}
+.navbar{
+    width: 90%;
+    margin: auto;
+    height: 15vh;
+    font-family: Poppins;
+}
+.navbar, .navlist{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar li{
+    list-style: none;
+    padding: 20px;
+}
+.navlist a{
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+    position: relative;
+}
+.navlist a::before{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: black;
+    transition-timing-function: .5s ease-in-out;
+}
+.navlist a:hover::before{
+    width: 100%;
+}
+
+
+@media screen and(max-width:796px) {
+    .navlist{
+        display: none;
+    }
+}

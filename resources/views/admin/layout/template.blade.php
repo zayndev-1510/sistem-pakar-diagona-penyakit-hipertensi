@@ -98,6 +98,10 @@
                                 <i class="ti-panel"></i>
                                 <span>Data Aturan</span></a>
                             </li>
+                            <li><a href="{{ url('admin/page/pasien') }}">
+                                <i class="ti-user"></i>
+                                <span>Data Pasien</span></a>
+                            </li>
 
                         </ul>
                     </nav>

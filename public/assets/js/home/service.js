@@ -17,7 +17,7 @@ app.service("service", ["$http", function ($http) {
     // fungsi memanggil api data penyakit
     this.dataPenyakit= function (callback) {
         $http({
-            url:  link+"data-penyakit",
+            url:  link+"admin/data-penyakit",
             method: "GET"
         }).then(function (e) {
             callback(e.data);
