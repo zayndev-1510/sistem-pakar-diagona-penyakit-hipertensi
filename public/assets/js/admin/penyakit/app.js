@@ -16,6 +16,7 @@ app.controller("homeController", function ($scope, service) {
 
 
     var temp_kode=0;
+    var pengobatan=[];
 
 
     // fungsi load data penyakit
@@ -68,6 +69,19 @@ app.controller("homeController", function ($scope, service) {
         temp_kode=row.kode_penyakit;
         penyakit[0].value=row.kode_penyakit;
         penyakit[1].value=row.nama_penyakit;
+        penyakit[2].value=row.keterangan;
+        penyakit[3].value="";
+        pengobatan=row.obat;
+        fun.dataobat=pengobatan;
+    }
+
+    fun.tambahPengobatan=()=>{
+        pengobatan.push({tips:penyakit[3].value,kode_penyakit:penyakit[0].value})
+        fun.dataobat=pengobatan;
+    }
+
+    fun.hapusObat=(index)=>{
+      pengobatan.splice(index,1)
     }
 
     fun.hapus=(row)=>{
@@ -98,7 +112,8 @@ app.controller("homeController", function ($scope, service) {
 
         var obj={
             kode_penyakit:penyakit[0].value,
-            nama_penyakit:penyakit[1].value
+            nama_penyakit:penyakit[1].value,
+            keterangan:penyakit[2].value
         }
 
         service.savePenyakit(obj,row=>{
@@ -115,6 +130,12 @@ app.controller("homeController", function ($scope, service) {
                 text:"Simpan data berhasil",
                 icon:"success"
             });
+            var data={
+                data:pengobatan
+            }
+            service.savePengobatan(data,res=>{
+
+            })
             fun.loadData();
             fun.clearData();
         })
@@ -125,7 +146,8 @@ app.controller("homeController", function ($scope, service) {
         var obj={
             kode_penyakit:penyakit[0].value,
             nama_penyakit:penyakit[1].value,
-            temp_kode:temp_kode
+            temp_kode:temp_kode,
+            keterangan:penyakit[2].value
         };
 
         service.updatePenyakit(obj,row=>{
@@ -144,6 +166,33 @@ app.controller("homeController", function ($scope, service) {
             });
             fun.loadData();
         })
+
+
+        var data={
+            data:pengobatan
+        }
+
+        service.checkData(data,res=>{
+            var action=res.action;
+            service.updatePengobatan(data,row=>{
+                var check=row.action;
+                if(check==0){
+                    swal({
+                        text:"Perbarui data gagal!",
+                        icon:"error",
+                    });
+                    return;
+                }
+
+                swal({
+                    text:"Perbarui data berhasil",
+                    icon:"success"
+                });
+                fun.loadData();
+            })
+
+        })
+
 
     }
 

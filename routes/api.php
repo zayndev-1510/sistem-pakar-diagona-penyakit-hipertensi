@@ -62,6 +62,15 @@ Route::prefix("admin")->group(function(){
     route::get("data-pasien",[PasienControllers::class,"dataPasien"]);
     route::post("hapus-pasien",[PasienControllers::class,"hapusPasien"]);
 
+    // Manajemen Data Pengobatan
+
+    route::post("save-data-pengobatan",[CPenyakit::class,"savePengobatan"]);
+    route::post("update-data-pengobatan",[CPenyakit::class,"updatePengobatan"]);
+    route::post("check-data",[CPenyakit::class,"checkData"]);
+
+
+
+
 
 });
 

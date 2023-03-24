@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin\dao;
 
 use App\Http\Controllers\Controller;
+use App\Models\admin\PengobatanModels;
 use App\Models\admin\PenyakitModels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,15 @@ class CPenyakit extends Controller
         try {
             $data=[];
             $data=DB::table("tbl_penyakit")->select("*")->get();
+            $obat=DB::table("tbl_atasi_penyakit")->select("*")->get();
+            foreach ($data as $key => $value) {
+                $data[$key]->obat=[];
+                foreach ($obat as $keys => $values) {
+                    if($value->kode_penyakit==$values->kode_penyakit){
+                        $data[$key]->obat[]=$values;
+                    }
+                }
+            }
 
             echo json_encode([
                 "code"=>200,
@@ -39,7 +49,8 @@ class CPenyakit extends Controller
         try {
             $input=[
                 "kode_penyakit"=>$r->kode_penyakit,
-                "nama_penyakit"=>$r->nama_penyakit
+                "nama_penyakit"=>$r->nama_penyakit,
+                "keterangan"=>$r->keterangan
             ];
 
             $query=PenyakitModels::create($input);
@@ -75,7 +86,8 @@ class CPenyakit extends Controller
         try {
             $input=[
                 "kode_penyakit"=>$r->kode_penyakit,
-                "nama_penyakit"=>$r->nama_penyakit
+                "nama_penyakit"=>$r->nama_penyakit,
+                "keterangan"=>$r->keterangan
             ];
 
             $query=PenyakitModels::where("kode_penyakit",$r->temp_kode)->update($input);
@@ -91,14 +103,15 @@ class CPenyakit extends Controller
             echo json_encode([
                 "code"=>200,
                 "message"=>"Failed",
-                "action"=>0
+                "action"=>0,
+
             ]);
 
 
         } catch (\Throwable $th) {
             echo json_encode([
                 "code"=>500,
-                "message"=>"Failed",
+                "message"=>"Error ".$th->getMessage(),
                 "action"=>0
             ]);
         }
@@ -109,6 +122,7 @@ class CPenyakit extends Controller
         try {
 
             $query=PenyakitModels::where("kode_penyakit",$r->temp_kode)->delete();
+            PengobatanModels::where("kode_penyakit",$r->temp_kode)->delete();
             if($query){
                 echo json_encode([
                     "code"=>200,
@@ -131,5 +145,147 @@ class CPenyakit extends Controller
                 "action"=>0
             ]);
         }
+    }
+
+    // fungsi menambahkan data pengobatan
+
+    public function savePengobatan(Request $r){
+        $data=$r->data;
+
+        try {
+            $check=false;
+            foreach ($data as $key => $value) {
+                $arr=[
+                    "kode_penyakit"=>$value["kode_penyakit"],
+                    "tips"=>$value["tips"]
+                ];
+
+            $querys=PengobatanModels::create($arr);
+            if($querys){
+                $check=true;
+            }
+            }
+
+            if($check){
+                echo json_encode(
+                    [
+                        "code"=>200,
+                        "message"=>"Success",
+                        "action"=>1
+                    ]
+                    );
+                    return;
+            }
+            echo json_encode(
+                [
+                    "code"=>200,
+                    "message"=>"Failed",
+                    "action"=>0
+                ]
+                );
+
+        } catch (\Throwable $th) {
+            echo json_encode(
+                [
+                    "code"=>500,
+                    "message"=>"Error ".$th->getMessage(),
+                    "action"=>0
+                ]
+                );
+        }
+
+    }
+
+
+    // fungsi pengecekan data pengobatan
+
+    public function checkData(Request $r){
+        try {
+            $data=$r->data;
+            $array=[];
+            $check=false;
+            foreach ($data as $key => $value) {
+                $arr=[
+                    "kode_penyakit"=>$value["kode_penyakit"],
+                    "tips"=>$value["tips"]
+                ];
+            $datacheck=DB::table("tbl_atasi_penyakit")->where("kode_penyakit",$value["kode_penyakit"])->select("*")->get();
+            if(count($datacheck)>0){
+                PengobatanModels::where("kode_penyakit",$value["kode_penyakit"])->delete();
+                echo json_encode([
+                    "code"=>200,
+                    "message"=>"Success",
+                    "action"=>1,
+                    "status"=>true
+                ]);
+            }
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Success",
+                "action"=>1,
+                "status"=>false
+            ]);
+            }
+        }
+        catch (\Throwable $th) {
+            echo json_encode(
+                [
+                    "code"=>500,
+                    "message"=>"Error ".$th->getMessage(),
+                    "action"=>0
+                ]
+                );
+        }
+
+
+    }
+      // fungsi memperbarui data pengobatan
+
+    public function updatePengobatan(Request $r){
+        $data=$r->data;
+
+        try {
+            $check=false;
+            foreach ($data as $key => $value) {
+                $arr=[
+                    "kode_penyakit"=>$value["kode_penyakit"],
+                    "tips"=>$value["tips"]
+                ];
+                $query=PengobatanModels::create($arr);
+                if($query){
+                    $check=true;
+                }
+            }
+
+            if($check){
+                echo json_encode(
+                    [
+                        "code"=>200,
+                        "message"=>"Success",
+                        "action"=>1
+                    ]
+                    );
+                    return;
+            }
+            echo json_encode(
+                [
+                    "code"=>200,
+                    "message"=>"Failed",
+                    "action"=>0
+                ]
+                );
+
+
+
+        } catch (\Throwable $th) {
+            echo json_encode(
+                [
+                    "code"=>500,
+                    "message"=>"Error ".$th->getMessage(),
+                    "action"=>0
+                ]
+                );
+        }
+
     }
 }

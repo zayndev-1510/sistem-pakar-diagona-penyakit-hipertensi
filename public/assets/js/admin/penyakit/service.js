@@ -29,6 +29,43 @@ app.service("service", ["$http", function ($http) {
         });
     }
 
+     // fungsi memanggil api menyimpan data penyakit
+
+     this.savePengobatan= function (obj,callback) {
+        $http({
+            url:  link+"save-data-pengobatan",
+            method: "POST",
+            data:obj
+        }).then(function (e) {
+            callback(e.data);
+        }).catch(function (err) {
+
+        });
+    }
+
+    this.updatePengobatan= function (obj,callback) {
+        $http({
+            url:  link+"update-data-pengobatan",
+            method: "POST",
+            data:obj
+        }).then(function (e) {
+            callback(e.data);
+        }).catch(function (err) {
+
+        });
+    }
+    this.checkData= function (obj,callback) {
+        $http({
+            url:  link+"check-data",
+            method: "POST",
+            data:obj
+        }).then(function (e) {
+            callback(e.data);
+        }).catch(function (err) {
+
+        });
+    }
+
 
     // fungsi memanggil api mempebarui data penyakit
 

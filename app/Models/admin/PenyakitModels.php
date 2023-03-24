@@ -12,6 +12,6 @@ class PenyakitModels extends Model
     protected $primaryKey = "kode_penyakit";
     public $timestamps = false;
 
-    protected $fillable =["kode_penyakit","nama_penyakit"];
-    
+    protected $fillable =["kode_penyakit","nama_penyakit","keterangan"];
+
 }

@@ -100,6 +100,57 @@
                                                 </p>
                                             </div>
                                         </div>
+                                         <div class="col-12">
+                                            <div class="form-group">
+                                                <textarea class="form-control penyakit" placeholder="Keterangan"></textarea>
+                                                <p style="font-size: 12px;font-family: Poppins;"><small style="color: red;"> * </small> Wajib Isi
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-11">
+                                                    <div class="form-group">
+                                                        <textarea class="form-control penyakit" placeholder="Pengobatan"></textarea>
+                                                        <p style="font-size: 12px;font-family: Poppins;"><small style="color: red;"> * </small> Wajib Isi
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <p id="design-btn-2" style="background-color: #514496;cursor: pointer;height: 38px;padding: 10px;"
+                                                    ng-click="tambahPengobatan()"> <i class="ti-plus" style="font-size: 15px;"></i></p>
+                                                </div>
+                                                <div class="col-12">
+                                                    <table class="table table-bordered">
+                                                        <thead class="bg-light" style="font-size: 12px;">
+                                                            <tr class="text-center" style="font-family: Poppins;font-size: 13px;text-align: center;">
+                                                                <th>No</th>
+                                                                <th>Solusi</th>
+                                                                <th>
+                                                                    Aksi
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody style="font-size: 12px">
+                                                            <tr class="text-center" ng-repeat="row in dataobat" style="font-family: Poppins;font-size: 13px;text-align: center;">
+                                                                <td>@{{ $index + 1 }}</td>
+                                                                <td>@{{ row.tips }}</td>
+                                                                <td>
+                                                                    <div class="row">
+
+                                                                        <div class="col-12 col-md-12">
+                                                                            <p id="design-btn-2" style="background-color: #E81224;cursor: pointer;"
+                                                                                ng-click="hapusObat($index)"> <i class="ti-trash"></i> Hapus Data</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="col-4">
