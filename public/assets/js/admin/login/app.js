@@ -13,6 +13,8 @@ app.controller("homeController", function ($scope, service) {
     var check=false;
     var username=document.getElementById("username");
     var password=document.getElementById("password");
+    username.value="";
+    password.value="";
     fun.loginAdmin=()=>{
 
 
@@ -49,9 +51,8 @@ app.controller("homeController", function ($scope, service) {
                 });
                 return;
             }
-
-            document.cookie="idlogin="+row.data;
             window.location.href="http://localhost:8000/admin/page/dashboard";
+            
         });
 
     }

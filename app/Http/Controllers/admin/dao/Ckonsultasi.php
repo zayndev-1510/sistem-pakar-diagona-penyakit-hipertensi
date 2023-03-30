@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\admin\PasienModels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+session_start();
 class Ckonsultasi extends Controller
 {
     // fungsi memanggil data gejala konsultasi
@@ -41,6 +42,14 @@ class Ckonsultasi extends Controller
 
     // fungsi memanggil data proses konsultasi
     public function prosesKonsultasi(Request $r){
+        if(!isset($_SESSION["tokenuser"])){
+            echo json_encode([
+                "code"=>500,
+                "message"=>"Tidak ada akses API ",
+                "action"=>0
+            ]);
+            return;
+        }
         try {
             $cfuser=$r->data;
             $cfpakar=DB::table("tbl_basis_pengetahuan")->orderBy("kode_penyakit")->orderBy("kode_gejala")->select("*")->get();

@@ -7,12 +7,20 @@ use App\Models\admin\PengobatanModels;
 use App\Models\admin\PenyakitModels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+session_start();
 class CPenyakit extends Controller
 {
 
     // fungsi menampilkan data penyakit
     public function loadData(){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>400,
+                "message"=>"Tidak ada akses untuk API",
+                "action"=>0
+            ]);
+            return;
+        }
 
         try {
             $data=[];
@@ -46,6 +54,14 @@ class CPenyakit extends Controller
 
     // fungsi menyimpan data penyakit
     public function saveData(Request $r){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>400,
+                "message"=>"Tidak ada akses untuk API",
+                "action"=>0
+            ]);
+            return;
+        }
         try {
             $input=[
                 "kode_penyakit"=>$r->kode_penyakit,
@@ -82,6 +98,14 @@ class CPenyakit extends Controller
 
     // fungsi memperbarui data penyakit
     public function updateData(Request $r){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>400,
+                "message"=>"Tidak ada akses untuk API",
+                "action"=>0
+            ]);
+            return;
+        }
 
         try {
             $input=[
@@ -119,6 +143,14 @@ class CPenyakit extends Controller
 
     // fungsi menghapus data penyakit
     public function deleteData(Request $r){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>400,
+                "message"=>"Tidak ada akses untuk API",
+                "action"=>0
+            ]);
+            return;
+        }
         try {
 
             $query=PenyakitModels::where("kode_penyakit",$r->temp_kode)->delete();
@@ -150,6 +182,14 @@ class CPenyakit extends Controller
     // fungsi menambahkan data pengobatan
 
     public function savePengobatan(Request $r){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>400,
+                "message"=>"Tidak ada akses untuk API",
+                "action"=>0
+            ]);
+            return;
+        }
         $data=$r->data;
 
         try {
@@ -200,6 +240,14 @@ class CPenyakit extends Controller
     // fungsi pengecekan data pengobatan
 
     public function checkData(Request $r){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>400,
+                "message"=>"Tidak ada akses untuk API",
+                "action"=>0
+            ]);
+            return;
+        }
         try {
             $data=$r->data;
             $array=[];
@@ -242,6 +290,14 @@ class CPenyakit extends Controller
       // fungsi memperbarui data pengobatan
 
     public function updatePengobatan(Request $r){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>400,
+                "message"=>"Tidak ada akses untuk API",
+                "action"=>0
+            ]);
+            return;
+        }
         $data=$r->data;
 
         try {

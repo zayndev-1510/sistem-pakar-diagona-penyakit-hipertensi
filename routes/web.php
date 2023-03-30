@@ -3,7 +3,7 @@
 use App\Http\Controllers\admin\page\Page;
 use Illuminate\Support\Facades\Route;
 
-
+route::get("/",[Page::class,"homeUser"]);
 route::get("home",[Page::class,"homeUser"]);
 route::get("gejala",[Page::class,"gejalaUser"]);
 route::get("penyakit",[Page::class,"penyakitUser"]);

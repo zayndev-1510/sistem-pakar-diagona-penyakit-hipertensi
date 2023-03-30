@@ -6,10 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\admin\AdminModels;
 use Illuminate\Support\Facades\DB;
+session_start();
 class Clogin extends Controller
 {
+
+   
     public function cobaCF(){
-        $aturan=DB::table("tbl_aturan")->select("*")->get();
+        $data=DB::table("tbl_pembayaran")->select("nis","harga","sum(harga) as total")->groupBy("nis")->get();
+        echo json_encode($data);
     }
     public function loginAdmin(Request $r){
 
@@ -24,6 +28,7 @@ class Clogin extends Controller
                     "data"=>$query->id_login
                 ]
                 );
+                $_SESSION["idtoken"]=$query->id_login;
                 return;
             }
 

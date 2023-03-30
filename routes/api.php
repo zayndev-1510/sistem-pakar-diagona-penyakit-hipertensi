@@ -7,10 +7,11 @@ use App\Http\Controllers\admin\dao\Ckonsultasi;
 use App\Http\Controllers\admin\dao\Clogin;
 use App\Http\Controllers\admin\dao\CPenyakit;
 use App\Http\Controllers\admin\dao\PasienControllers;
+use App\Http\Controllers\pengguna\PenyakitController;
 use Illuminate\Support\Facades\Route;
 
 
-route::get("coba",[Clogin::class,"cobaCF"]);
+route::get("coba",[Clogin::class,"coba"]);
 
 // data gejala konsultasi
 route::get("data-gejala-konsultasi",[Ckonsultasi::class,"gejalaKonsultasi"]);
@@ -18,6 +19,12 @@ route::get("data-gejala-konsultasi",[Ckonsultasi::class,"gejalaKonsultasi"]);
 // proses konsultasi
 route::post("proses-konsultasi",[Ckonsultasi::class,"prosesKonsultasi"]);
 route::post("save-pasien",[Ckonsultasi::class,"savePasien"]);
+
+
+Route::prefix("pengguna")->group(function(){
+    route::get("data-penyakit",[PenyakitController::class,"loadData"]);
+    route::get("data-gejala",[PenyakitController::class,"loadDataGejala"]);
+});
 
 Route::prefix("admin")->group(function(){
 
