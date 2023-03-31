@@ -124,6 +124,9 @@
     </div>
 @endsection
 @section('javascript')
+    <script>
+    const url="{{ env("API_URL_ADMIN") }}";
+    </script>
     <script src="{{ asset('assets/angularjs/angular.min.js') }}"></script>
     <script src="{{ asset('assets/angularjs/angular-route.min.js') }}"></script>
     <script src="{{ asset('assets/angularjs/angular-datatables.min.js') }}"></script>

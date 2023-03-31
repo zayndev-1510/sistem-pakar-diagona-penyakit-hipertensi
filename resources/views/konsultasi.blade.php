@@ -303,7 +303,9 @@
 
     </div>
    </div>
-
+   <script>
+    const url="{{ env("API_URL_PENGGUNA") }}";
+   </script>
     <script src="{{ asset('assets/js/konsultasi/app.js') }}"></script>
     <script src="{{ asset('assets/js/konsultasi/service.js') }}"></script>
     <script src="{{ asset('assets/angularjs/sweetalert.min.js') }}"></script>

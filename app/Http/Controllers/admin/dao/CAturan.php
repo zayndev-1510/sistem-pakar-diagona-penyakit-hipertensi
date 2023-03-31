@@ -6,12 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\admin\AturanModels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+session_start();
 class CAturan extends Controller
 {
     // tampil data aturan
 
     public function loadData(){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Tidak ada akses API",
+                "action"=>0,
+                "token"=>"Token tidak cocok"
+            ]);
+            return;
+        }
 
         try {
             $data=DB::table("tbl_aturan as a")->
@@ -37,6 +46,15 @@ class CAturan extends Controller
 
     // menyimpan data aturan
     public function saveData(Request $r){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Tidak ada akses API",
+                "action"=>0,
+                "token"=>"Token tidak cocok"
+            ]);
+            return;
+        }
         try {
 
             $data=[
@@ -72,6 +90,15 @@ class CAturan extends Controller
 
      // menmperbarui data aturan
      public function updateData(Request $r){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Tidak ada akses API",
+                "action"=>0,
+                "token"=>"Token tidak cocok"
+            ]);
+            return;
+        }
         try {
 
             $data=[
@@ -107,6 +134,15 @@ class CAturan extends Controller
 
      // menghapus data aturan
      public function deleteData(Request $r){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Tidak ada akses API",
+                "action"=>0,
+                "token"=>"Token tidak cocok"
+            ]);
+            return;
+        }
         try {
 
             $query=AturanModels::where("id_aturan",$r->id_aturan)->delete();

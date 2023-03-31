@@ -99,6 +99,9 @@
     </div>
 @endsection
 @section('javascript')
+    <script>
+    const url="{{ env("API_URL_ADMIN") }}";
+    </script>
     <script src="{{ asset('grafik/chart.min.js') }}"></script>
     <script src="{{ asset('grafik/chartjs-plugin-datalabels.min.js') }}"></script>
 

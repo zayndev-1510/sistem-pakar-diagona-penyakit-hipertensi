@@ -1,11 +1,8 @@
 app.service("service", ["$http", function ($http) {
-    var link="http://localhost:8000/api/"
-
-
      // fungsi memanggil api data penyakit
      this.dataGejala= function (callback) {
         $http({
-            url:  link+"pengguna/data-gejala",
+            url:  url+"data-gejala",
             method: "GET"
         }).then(function (e) {
             callback(e.data);
@@ -17,7 +14,7 @@ app.service("service", ["$http", function ($http) {
     // fungsi memanggil api data penyakit
     this.dataPenyakit= function (callback) {
         $http({
-            url:  link+"pengguna/data-penyakit",
+            url:  url+"data-penyakit",
             method: "GET"
         }).then(function (e) {
             callback(e.data);
@@ -30,7 +27,7 @@ app.service("service", ["$http", function ($http) {
     // fungsi memanggil api proses konsultasi
     this.prosesKonsultasi= function (obj,callback) {
         $http({
-            url:  link+"proses-konsultasi",
+            url:  url+"proses-konsultasi",
             method: "POST",
             data:obj
         }).then(function (e) {

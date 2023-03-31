@@ -8,8 +8,6 @@ app.controller("homeController", function ($scope, service) {
     var fun = $scope;
 
     var service = service;
-
-
     fun.pageKonsultasi=()=>{
         window.location.href="http://localhost:8000/konsultasi";
     }

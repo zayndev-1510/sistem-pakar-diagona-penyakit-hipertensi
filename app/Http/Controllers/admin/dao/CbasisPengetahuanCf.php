@@ -6,10 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\admin\BasisPengetahuanCFModels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+session_start();
 class CbasisPengetahuanCf extends Controller
 {
     function loadDataKepastian(){
-
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Tidak ada akses API",
+                "action"=>0,
+                "token"=>"Token tidak cocok"
+            ]);
+            return;
+        }
         try {
             $data=DB::table("tbl_nilai_kepastian")->select("*")->get();
 
@@ -33,6 +42,15 @@ class CbasisPengetahuanCf extends Controller
     }
 
     function loadDataBasis(){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Tidak ada akses API",
+                "action"=>0,
+                "token"=>"Token tidak cocok"
+            ]);
+            return;
+        }
         try {
             $penyakit=DB::table("tbl_penyakit")->select("*")->get();
             $basis_pengetahuan=DB::table("tbl_basis_pengetahuan as b")->join("tbl_gejala as g","b.kode_gejala","=","g.kode_gejala")
@@ -72,6 +90,16 @@ class CbasisPengetahuanCf extends Controller
     }
 
     function saveData(Request $request){
+
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Tidak ada akses API",
+                "action"=>0,
+                "token"=>"Token tidak cocok"
+            ]);
+            return;
+        }
         $data=[
             "kode_penyakit"=>$request->kode_penyakit,"kode_gejala"=>$request->kode_gejala,
             "mb"=>$request->mb,"md"=>$request->md
@@ -106,6 +134,16 @@ class CbasisPengetahuanCf extends Controller
         }
     }
     function updateData(Request $request){
+
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Tidak ada akses API",
+                "action"=>0,
+                "token"=>"Token tidak cocok"
+            ]);
+            return;
+        }
         $data=[
             "kode_penyakit"=>$request->kode_penyakit,"kode_gejala"=>$request->kode_gejala,
             "mb"=>$request->mb,"md"=>$request->md
@@ -139,6 +177,15 @@ class CbasisPengetahuanCf extends Controller
         }
     }
     function deleteData(Request $request){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Tidak ada akses API",
+                "action"=>0,
+                "token"=>"Token tidak cocok"
+            ]);
+            return;
+        }
         try {
             $query=BasisPengetahuanCFModels::where("id_pengetahuan",$request->id_pengetahuan)->delete();
             if($query){

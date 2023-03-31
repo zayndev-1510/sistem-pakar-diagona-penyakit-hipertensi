@@ -49,7 +49,9 @@
         </div>
     </div>
    </div>
-
+   <script>
+    const url="{{ env("API_URL_PENGGUNA") }}";
+   </script>
     <script src="{{ asset('assets/js/home/gejala.js') }}"></script>
     <script src="{{ asset('assets/js/home/service.js') }}"></script>
     <script src="{{ asset('assets/angularjs/sweetalert.min.js') }}"></script>

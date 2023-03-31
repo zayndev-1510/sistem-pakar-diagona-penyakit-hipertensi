@@ -11,7 +11,14 @@ class Ckonsultasi extends Controller
 {
     // fungsi memanggil data gejala konsultasi
     public function gejalaKonsultasi(){
-
+        if(!isset($_SESSION["tokenuser"])){
+            echo json_encode([
+                "code"=>500,
+                "message"=>"Tidak ada akses API ",
+                "action"=>0
+            ]);
+            return;
+        }
 
         try {
             $data=DB::table("tbl_gejala")->select("*")->get();
@@ -245,6 +252,14 @@ class Ckonsultasi extends Controller
     }
 
     public function savePasien(Request $r){
+        if(!isset($_SESSION["tokenuser"])){
+            echo json_encode([
+                "code"=>500,
+                "message"=>"Tidak ada akses API ",
+                "action"=>0
+            ]);
+            return;
+        }
         try {
             date_default_timezone_set("Asia/Makassar");
             $string=implode(",",$r->gejala);

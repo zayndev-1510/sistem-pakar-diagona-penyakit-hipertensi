@@ -7,11 +7,21 @@ use App\Models\admin\GejalaModels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+session_start();
 class CGejala extends Controller
 {
      // fungsi menampilkan data gejala
      public function loadData(){
 
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Tidak ada akses API",
+                "action"=>0,
+                "token"=>"Token tidak cocok"
+            ]);
+            return;
+        }
         try {
             $data=[];
            $data=DB::table("tbl_gejala")->select("*")->get();
@@ -35,6 +45,15 @@ class CGejala extends Controller
 
     // fungsi menyimpan data penyakit
     public function saveData(Request $r){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Tidak ada akses API",
+                "action"=>0,
+                "token"=>"Token tidak cocok"
+            ]);
+            return;
+        }
         try {
             $input=[
                 "kode_gejala"=>$r->kode_gejala,
@@ -70,7 +89,15 @@ class CGejala extends Controller
 
     // fungsi memperbarui data penyakit
     public function updateData(Request $r){
-
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Tidak ada akses API",
+                "action"=>0,
+                "token"=>"Token tidak cocok"
+            ]);
+            return;
+        }
         try {
             $input=[
                 "kode_gejala"=>$r->kode_gejala,
@@ -105,6 +132,15 @@ class CGejala extends Controller
 
     // fungsi menghapus data penyakit
     public function deleteData(Request $r){
+        if(!isset($_SESSION["idtoken"])){
+            echo json_encode([
+                "code"=>200,
+                "message"=>"Tidak ada akses API",
+                "action"=>0,
+                "token"=>"Token tidak cocok"
+            ]);
+            return;
+        }
         try {
 
             $query=GejalaModels::where("kode_gejala",$r->temp_kode)->delete();
