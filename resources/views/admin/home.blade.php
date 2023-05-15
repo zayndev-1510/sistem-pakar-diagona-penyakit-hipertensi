@@ -29,7 +29,7 @@
                             </p>
                         </div>
                         <div class="col-md-6">
-                            <img src="{{asset('Hipertensi_mempengaruhi_seluruh_tubuh_MRHP.jpg')}}" class="img-responsive"/>
+                            <img src="{{asset('hipertensi_2.jpg')}}" class="img-responsive"/>
                         </div>
                     </div>
                 </div>

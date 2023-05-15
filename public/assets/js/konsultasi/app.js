@@ -31,6 +31,10 @@ app.controller("homeController", function ($scope, service) {
 
     }
 
+    fun.limitDecimal=(hasil)=>{
+        return hasil.toFixed(2);
+    }
+
     fun.prosesKonsultasi=()=>{
         var x=0;
         for(var i=0;i<pasien.length;i++){
@@ -83,8 +87,9 @@ app.controller("homeController", function ($scope, service) {
 
 
             fun.p=penyakit.penyakit
-            fun.hasilpersen=penyakit.hasil;
+            fun.hasilpersen=penyakit.hasil.toFixed(2)
 
+            fun.hasil_data=true;
             var duplicate=row.data.duplicate
             if(duplicate>0){
                 fun.penyakit="Berdasarkan aturan diatas penyakit tidak ditemukan";
@@ -103,11 +108,15 @@ app.controller("homeController", function ($scope, service) {
                 penyakit:penyakit.penyakit,
                 gejala:gejalatemp
             }
+            /*
           service.savePasien(data,respon=>{
 
           })
           fun.loadDataGejala();
+
           gejalatemp=[];
+          */
+
         });
     }
 

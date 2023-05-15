@@ -28,7 +28,7 @@
             </ul>
         </div>
         <div class="hero">
-            <img src="{{ asset("Hipertensi_mempengaruhi_seluruh_tubuh_MRHP.jpg")}}"/>
+            <img src="{{ asset("hipertensi_2.jpg")}}"/>
             <div class="content">
                 <h3>Diagonosa Penyakit Hipertensi</h3>
                 <h1>Perbandingan Metode Forward Chaining Dan Certainly Factor</h1>

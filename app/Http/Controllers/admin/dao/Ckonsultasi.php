@@ -69,9 +69,11 @@ class Ckonsultasi extends Controller
                 foreach ($cfuser as $keys => $values) {
                     $rules[$keys]=$values["kode_gejala"];
                     if($values["kode_gejala"]==$value->kode_gejala){
-                        $value->CFPakar=round($value->mb-$value->md,1);
-                        $value->CFHasil=round($value->CFPakar*$values["cfuser"],1);
-                        $value->CFuser=$values["cfuser"];
+                        $arrnilai=[round($value->mb,1),round($value->md,1)];
+                        $value->CFPakar=round($arrnilai[0]-$arrnilai[1],1);
+                        $hasil=(float)$value->CFPakar*(float)$values["cfuser"];
+                        $value->CFHasil=$hasil;
+                        $value->CFuser=(float)$values["cfuser"];
                         $value->nama_gejala=$values["gejala"];
                         $datanew[]=$value;
                     }
@@ -174,10 +176,11 @@ class Ckonsultasi extends Controller
                 }
             }
             $duplicate_y=0;
-
-            $checkmaxvalue=false;
+            $arrmax=[];
+            $arrpenyakit="";
             if($check==0){
                 $y=0;
+                $j=0;
 
                 foreach ($datapakar as $key => $value) {
                     $x=$value["x"];
@@ -185,22 +188,18 @@ class Ckonsultasi extends Controller
                         $y=$x;
                     }
                     if($x==$y){
-                        $checkmaxvalue=true;
-                        $strpenyakit=$value["nama_penyakit"];
+                        $arrmax[]=$x;
+                        $arrpenyakit=$value["nama_penyakit"];
                     }
                 }
-                if(!$checkmaxvalue){
-                    $cm = array_column($datapakar, 'x');
-                    if($cm != array_unique($cm)){
-                       $duplicate_y=$duplicate_y+1;
-                    }
+                $n=count($arrmax);
+                if($n>1){
+                    $strpenyakit="Tidak Ada Penyakit Berdasarkan Rule Yang Ada";
+                }else{
+                    $strpenyakit=$arrpenyakit;
                 }
-
 
             }
-
-
-
             $k=0;
             $arrpenyakit=[];
             $j=0;
@@ -240,6 +239,7 @@ class Ckonsultasi extends Controller
 
 
             ]);
+
         } catch (\Throwable $th) {
           echo json_encode(
             [

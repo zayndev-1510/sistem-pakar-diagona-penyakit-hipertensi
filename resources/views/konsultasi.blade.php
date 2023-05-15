@@ -29,7 +29,7 @@
             </ul>
         </div>
         <div class="column-one" style="margin-left: 100px;margin-right: 100px;">
-          <div class="column-one formulir-pasien">
+          <div class="column-one formulir-pasien" ng-hide="hasil_data">
             <div id="form-pasien">
                 <table class="styled-table">
                     <h3>FORMULIR PASIEN BARU</h3>
@@ -124,7 +124,7 @@
                 background-color:#254abe;border-radius: 10px;cursor: pointer;" ng-click="prosesKonsultasi()">Proses</button>
             </div>
           </div>
-            <div class="column-two" id="datapakaruser">
+            <div class="column-two" id="datapakaruser" ng-show="hasil_data">
                 <div id="table-pakar">
                     <h4 style="padding: 10px;font-size: 15px;font-family: Poppins;text-align: center;">Data Pakar</h4>
                     <hr></hr>
@@ -183,7 +183,7 @@
                     </table>
                 </div>
             </div>
-            <div class="column-two" id="datahasil">
+            <div class="column-two" id="datahasil" ng-show="hasil_data">
                 <div id="table-pakar">
                     <h4 style="padding: 10px;font-size: 15px;font-family: Poppins;text-align: center">Data Hasil Perhitungan I</h4>
                     <hr></hr>
@@ -205,7 +205,7 @@
                             </tr>
                             <tr ng-repeat="res in row.pakar" class="text-center">
                                 <td>@{{ res.nama_gejala }}</td>
-                                <td>@{{res.CFHasil}}</td>
+                                <td>@{{limitDecimal(res.CFHasil)}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -238,7 +238,7 @@
                     </table>
                 </div>
             </div>
-            <div class="column-one">
+            <div class="column-one" ng-show="hasil_data">
                 <div>
                     <h4 style="padding: 10px;font-size: 15px;font-family: Poppins;text-align: center">Data Hasil Perhitungan Forward Chaining</h4>
                     <hr></hr>
@@ -273,7 +273,7 @@
                     </table>
                 </div>
             </div>
-            <div class="column-one">
+            <div class="column-one" ng-show="hasil_data">
                 <div>
                     <h4 style="padding: 10px;font-size: 15px;font-family: Poppins;text-align: center">Data Hasil Perhitungan Certainly Factor</h4>
                     <hr></hr>
@@ -298,7 +298,6 @@
                     </table>
                 </div>
             </div>
-
         </div>
 
     </div>
